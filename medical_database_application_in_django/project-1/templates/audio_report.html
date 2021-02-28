@@ -1,0 +1,300 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block stylesheet %}
+
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
+
+{% endblock %}
+{% block body %}
+    <div id="content-wrapper">
+        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {{form.errors}}
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                
+                <li class="breadcrumb-item active">Audiometry Details</li>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="card-body">
+                        <!-- <h2>Personal Details</h2> -->
+                        <form action="." role="form" id="form_id" method="post" enctype="multipart/form-data" >
+                          {% csrf_token %}
+                          <div class="row">
+                            {{form.audio_id}}
+                            <div class="col-3">
+                              {{ form.patient_name|as_crispy_field }}
+                            </div>
+                            <div class="col-3">
+                              {{ form.date|as_crispy_field }}
+                            </div>
+                            
+                          </div>
+                          
+                         
+                          
+                          <div class="card-body">
+                            <!-- <h3 align="Center">Enter Audiometry values</h3> -->
+
+                            <table style="width:100%;">
+                                <tr>
+                                  <th scope="col"></th> 
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                  <th scope="col">LEFT EAR Air Conditio</th>
+                                  <th scope="col"></th> 
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                </tr>
+                                <tr>
+                                  <!-- <th scope="row">Hypertension</th> -->
+                                  <td>{{ form.le_ear_125|as_crispy_field }}</td>
+                                  <td>{{ form.le_ear_250|as_crispy_field }}</td>
+                                  <td>{{ form.le_ear_500|as_crispy_field }}</td>
+                                  <td>{{ form.le_ear_1K|as_crispy_field }}</td>
+                                  <td>{{ form.le_ear_2K|as_crispy_field }}</td>
+                                  <td>{{ form.le_ear_4K|as_crispy_field }}</td>
+                                  <td>{{ form.le_ear_6K|as_crispy_field }}</td>
+                                  <td>{{ form.le_ear_8K|as_crispy_field }}</td>
+
+                                </tr>
+                                
+                                <tr>
+                                  <th scope="col"></th> 
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                  <th scope="col">RIGHT EAR Air Condition</th>
+                                  <th scope="col"></th> 
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                </tr>
+                                <tr>
+                                  <!-- <th scope="row">Hypertension</th> -->
+                                  <td>{{ form.re_ear_125|as_crispy_field }}</td>
+                                  <td>{{ form.re_ear_250|as_crispy_field }}</td>
+                                  <td>{{ form.re_ear_500|as_crispy_field }}</td>
+                                  <td>{{ form.re_ear_1K|as_crispy_field }}</td>
+                                  <td>{{ form.re_ear_2K|as_crispy_field }}</td>
+                                  <td>{{ form.re_ear_4K|as_crispy_field }}</td>
+                                  <td>{{ form.re_ear_6K|as_crispy_field }}</td>
+                                  <td>{{ form.re_ear_8K|as_crispy_field }}</td>
+
+                                </tr>
+
+                                <tr>
+                                   
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                  <th scope="col">LEFT EAR Bone Condition</th>
+                                  <th scope="col"></th> 
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                </tr>
+                                <tr>
+                                  <!-- <th scope="row">Hypertension</th> -->
+                                  <td>{{ form.bone_le_ear_250|as_crispy_field }}</td>
+                                  <td>{{ form.bone_le_ear_500|as_crispy_field }}</td>
+                                  <td>{{ form.bone_le_ear_1K|as_crispy_field }}</td>
+                                  <td>{{ form.bone_le_ear_2K|as_crispy_field }}</td>
+                                  <td>{{ form.bone_le_ear_4K|as_crispy_field }}</td>
+                                  
+
+                                </tr>
+                                
+                                <tr>
+                                  <th scope="col"></th> 
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                  <th scope="col">RIGHT EAR Bone Condition</th>
+                                  <th scope="col"></th>
+                                  <th scope="col"></th> 
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+
+                                </tr>
+                                <tr>
+                                  <!-- <th scope="row">Hypertension</th> -->
+                                  <td>{{ form.bone_re_ear_250|as_crispy_field }}</td>
+                                  <td>{{ form.bone_re_ear_500|as_crispy_field }}</td>
+                                  <td>{{ form.bone_re_ear_1K|as_crispy_field }}</td>
+                                  <td>{{ form.bone_re_ear_2K|as_crispy_field }}</td>
+                                  <td>{{ form.bone_re_ear_4K|as_crispy_field }}</td>
+                                  
+                                </tr>
+
+
+
+                                
+                              </table>
+                              
+                          </div> 
+                          
+                          <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                          <button class="btn btn-secondary btn-sm" type="reset">Cancel</button>
+                        </form>
+                      </div>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="maintable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>ALE-125</th>
+                                <th>ALE-250</th>
+                                <th>ALE-500</th>
+                                <th>ALE-1K</th>
+                                <th>ALE-2K</th>
+                                <th>ALE-4K</th>
+                                <th>ALE-6K</th>
+                                <th>ALE-8K</th>
+                                <th>ARE-125</th>
+                                <th>ARE-250</th>
+                                <th>ARE-500</th>
+                                <th>ARE-1K</th>
+                                <th>ARE-2K</th>
+                                <th>ARE-4K</th>
+                                <th>ARE-6K</th>
+                                <th>ARE-8K</th>
+                                <th>BLE-250</th>
+                                <th>BLE-500</th>
+                                <th>BLE-1K</th>
+                                <th>BLE-2K</th>
+                                <th>BLE-4K</th>
+                                <th>BRE-250</th>
+                                <th>BRE-500</th>
+                                <th>BRE-1K</th>
+                                <th>BRE-2K</th>
+                                <th>BRE-4K</th>
+                                
+                                <!-- <th></th> --> 
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for member in audio_info %}
+                                <tr>
+                                    <td>
+                                      <a class="btn btn-sm btn-warning" href="{% url 'audio_form_list' member.id %}"> <span class="fa fa-edit"></span> Edit</a>
+                                      <a class="btn btn-sm btn-danger" href="{% url 'audio_delete' member.id %}"><span class="fa fa-trash"></span> Delete</a>
+                                      <a class="btn btn-sm btn-primary" href="{% url 'graph' member.id %}"><span class="fa fa-print"></span> Print</a>
+                                    
+                                    </td>
+                                    <td>{{ member.patient_name }}</td>
+                                    <td>{{ member.date }}</td>
+                                    <td>{{ member.le_ear_125 }}</td>
+                                    <td>{{ member.le_ear_250 }}</td>
+                                    <td>{{ member.le_ear_500 }}</td>
+                                    <td>{{ member.le_ear_1K }}</td>
+                                    <td>{{ member.le_ear_2K }}</td>
+                                    <td>{{ member.le_ear_4K }}</td>
+                                    <td>{{ member.le_ear_6K }}</td>
+                                    <td>{{ member.le_ear_8K }}</td>
+                                    <td>{{ member.re_ear_125 }}</td>
+                                    <td>{{ member.re_ear_250 }}</td>
+                                    <td>{{ member.re_ear_500 }}</td>
+                                    <td>{{ member.re_ear_1K }}</td>
+                                    <td>{{ member.re_ear_2K }}</td>
+                                    <td>{{ member.re_ear_4K }}</td>
+                                    <td>{{ member.re_ear_6K }}</td>
+                                    <td>{{ member.re_ear_8K }}</td>
+                                    <td>{{ member.bone_le_ear_250 }}</td>
+                                    <td>{{ member.bone_le_ear_500 }}</td>
+                                    <td>{{ member.bone_le_ear_1K }}</td>
+                                    <td>{{ member.bone_le_ear_2K }}</td>
+                                    <td>{{ member.bone_le_ear_4K }}</td>
+                                    <td>{{ member.bone_re_ear_250 }}</td>
+                                    <td>{{ member.bone_re_ear_500 }}</td>
+                                    <td>{{ member.bone_re_ear_1K }}</td>
+                                    <td>{{ member.bone_re_ear_2K }}</td>
+                                    <td>{{ member.bone_re_ear_4K }}</td>
+                                    
+                                                                        
+                                    
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $("#id_username").attr("placeholder", "Enter Username");
+        $("#id_password").attr("placeholder", "Enter Password");
+    </script>
+
+<script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/buttons.flash.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/jszip.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/pdfmake.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/vfs_fonts.js' %}"></script>
+<script src="{% static 'vendor/datatables/buttons.html5.min.js' %}"></script>
+
+<script src="{% static 'vendor/datatables/moment.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/datetime-moment.js' %}"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
+<script>
+  // Call the dataTables jQuery plugin
+  $(document).ready(function() {
+    $('#maintable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+             'excel'
+        ]
+    } );
+} );
+</script>
+<!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<!-- <script>
+$(document).ready(function() {
+    $('.datepicker').datepicker();
+});
+</script> -->
+<script>
+  $(document).ready(function() {
+      // $('.datepicker').datepicker();
+      $('.datepicker').datepicker({
+      
+      maxDate: '+0d',
+      changeMonth: true,
+      changeYear: true,
+      defaultDate: '18yr',
+  });
+//   var date = new Date();
+// document.getElementById("id_date").value = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+// document.getElementById("id_date").disabled = true;  
+      
+  });
+</script>
+<!-- <script>
+$('#form_id').submit(function() {
+  document.getElementById("id_date").disabled = false;
+
+    //Rest of code
+    })
+</script> -->
+
+
+{% endblock %}

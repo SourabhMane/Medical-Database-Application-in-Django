@@ -1,0 +1,507 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block stylesheet %}
+
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
+
+{% endblock %}
+{% block body %}
+    <div id="content-wrapper">
+        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {{form.errors}}
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                
+                <li class="breadcrumb-item active">Urine Xray Blood Form </li>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="card-body">
+                        <form action="." role="form" id="form_id" method="post" enctype="multipart/form-data">
+                          {% csrf_token %}
+                            <div class="row">
+                                {{form.xray_id}}
+                                <div class="col-3">
+                                  {{ form.patient_name|as_crispy_field }}
+                                </div>
+                                <div class="col-3">
+                                  {{ form.date|as_crispy_field }}
+                                </div>
+                                
+                              </div>
+                              <h3 align="Center">Blood Test</h3>
+
+                              <div class="row">
+                                
+                                <div class="col-4">
+                                  {{ form.hb|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                  {{ form.wbc|as_crispy_field }}
+                                </div>
+                                
+                                  <div class="col-4">
+                                    {{ form.platelet_count|as_crispy_field }}
+                                  </div>  
+                                  
+                              </div>
+                              
+                                 <div class="row">                             
+                                
+                                <div class="col-6">
+                                  {{ form.esr|as_crispy_field }}
+                                </div>
+                                
+                                  
+                                  <div class="col-6">
+                                    {{ form.total_rbc|as_crispy_field }}
+                                  </div>
+                                                
+                                                                                         
+                                  
+                              </div>
+                              <div class="row">
+                                <div class="col-3">
+                                  {{ form.neutrophils|as_crispy_field }}
+                                </div>
+                                
+                                <div class="col-3">
+                                  {{ form.lymphocytes|as_crispy_field }}
+                                </div>
+                                <div class="col-3">
+                                    {{ form.eosinophils|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                    {{ form.monocytes|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                    {{ form.basophil|as_crispy_field }}
+                                  </div>  
+
+                              </div>
+                                                      
+                                
+                                  <h3 align="Center">Blood Group</h3>
+                                  <div class="row">
+                                                                 
+                                    <div class="col-4"></div>
+                                      <div class="col-4">
+                                        {{ form.blood_group|as_crispy_field }}
+                                      </div>
+                                      <div class="col-4"></div>
+                                    </div>
+                                  
+                                  <br>
+                                  <h3 align="Center">Blood Glucose Level </h3>
+                                  <div class="row">
+                                      <div class="col-4">
+                                        {{ form.fbsl|as_crispy_field }}
+                                      </div>
+                                      <div class="col-4">
+                                        {{ form.ppbsl|as_crispy_field }}
+                                      </div>
+                                      <div class="col-4">
+                                        {{ form.rbsl|as_crispy_field }}
+                                      </div>
+
+                                  </div><br>
+                                  <h3 align="Center">Lipid Profile </h3>
+                                  <div class="row">
+                                    <div class="col-3">{{ form.total_cholesterol|as_crispy_field }}</div>
+                                    <div class="col-3">{{ form.triglycerides|as_crispy_field }}</div>
+                                    <div class="col-3">{{ form.hdl|as_crispy_field }}</div>
+                                    <div class="col-3">{{ form.ldl|as_crispy_field }}</div>
+
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-4">{{ form.vldl|as_crispy_field }}</div>
+                                    <div class="col-4">{{ form.ldl_hdl_ratio|as_crispy_field}}</div>
+                                    <div class="col-4">{{ form.chol_hdl_ratio|as_crispy_field}}</div>
+
+                                  </div><br>
+                                  <!-- <h3 align="Center">Differential Count </h3> -->
+                                  <br>
+                                  <h3 align="Center">Liver Function Test</h3>
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  <div class="row">
+                                      <div class="col-4">{{ form.sgot|as_crispy_field }}</div>
+                                      <div class="col-4">{{ form.sgpt|as_crispy_field }}</div>
+                                      <div class="col-4">{{ form.bilirubin_total|as_crispy_field }}</div>  
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-4">{{ form.bilirubin_dierct|as_crispy_field }}</div>
+                                    <div class="col-4">{{ form.bilirubin_indierct|as_crispy_field }}</div>
+                                    <div class="col-4">{{ form.alkaline_phosphatase|as_crispy_field }}</div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-4">{{ form.total_protein|as_crispy_field }}</div>
+                                    <div class="col-4">{{ form.albumin|as_crispy_field }}</div>
+                                    <div class="col-4">{{ form.globumin|as_crispy_field }}</div>
+                                  </div><br>
+                                  <h3 align="Center">Kidney Function Test</h3>
+                                  <div class="row">
+                                      <div class="col-4">{{ form.blood_urea|as_crispy_field }}</div>
+                                      <div class="col-4">{{ form.se_creatinin|as_crispy_field }}</div>
+                                      <div class="col-4">{{form.uric_acid|as_crispy_field}}</div>
+                                  </div><br>
+                                            
+                              <h3 align="Center">Urine Routine Examination</h3>
+                              <div class="row">
+                                
+                                <div class="col-4">
+                                  {{ form.urine_colour|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                  {{ form.urine_appearance|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                    {{ form.urine_odour|as_crispy_field }}
+                                  </div>
+                                                                                                                  
+                                  
+                              </div>
+                              <div class="row">
+                                
+                                <div class="col-4">
+                                  {{ form.urine_protein|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                  {{ form.urine_sugar|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                    {{ form.urine_deposits|as_crispy_field }}
+                                  </div>
+                                                                                                                  
+                                  
+                              </div>
+                              <div class="row">
+                                
+                                <div class="col-4">
+                                  {{ form.urine_ph|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                  {{ form.urine_gravity|as_crispy_field }}
+                                </div>
+                                                                                                                                               
+                                  
+                              </div><br>
+                              
+                              <h3 align="Center">Urine Microscopic Examination</h3>
+                              <div class="row">
+                                
+                                <div class="col-4">
+                                  {{ form.microscopic_pus_cell|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                  {{ form.microscopic_epithelial_cell|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                    {{ form.microscopic_rbc_cells|as_crispy_field }}
+                                  </div>
+                                                                                                                  
+                                  
+                              </div>
+                              <div class="row">
+                                
+                                <div class="col-4">
+                                  {{ form.microscopic_crystals|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                  {{ form.microscopic_cast|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                    {{ form.microscopic_other_findings|as_crispy_field }}
+                                  </div>
+                                                                                                                  
+                                  
+                              </div><br>
+                              <h3 align="Center">X-RAY CHEST P.A.VIEW</h3>
+                              
+                                        {{ form.xray_view|as_crispy_field }}<br>
+                                    
+                              <div class="row">
+                                <div class="col-6">
+                                    {{ form.opinion|as_crispy_field }}
+                                </div>
+                              </div><br>
+
+
+
+
+
+                              
+                                
+                                 
+                                
+
+
+                          <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                            <button class="btn btn-secondary btn-sm" type="reset">Cancel</button>
+                          
+                        </form>
+                        
+                      </div>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="maintable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Patient  Name   </th>
+                                <th>Date </th>
+                                <!-- <th>Age </th> -->
+                                <!-- <th>Gender </th> -->
+                                <th>Hb</th>
+                                <th>Total WBC</th>
+                                <!-- <th>Diffrential WBC</th> -->
+                                <th>Neutrophils</th>
+                                <th>Lymphocytes</th>
+                                <th>Eosinophils</th>
+                                <th>Monocytes</th>
+                                <th>Basophil</th>
+                                <th>Total RBC</th>
+                                <th>Platelet Count</th>
+                                <th>ESR </th>
+                                <th>RBSL</th>
+                                <th>Blood Group</th>
+                                <th>Colour</th>
+                                <th>Appearance</th>
+                                <th>Odour</th>
+                                <th>PH</th>
+                                <th>Specific Gravity</th>
+                                <th>Deposits</th>
+                                <th>Protein</th>
+                                <th>Sugar</th>
+                                <th>Pus Cell  </th>
+                                <th>Epithelial Cell</th>
+                                <th>RBC Cells</th>
+                                <th>Crystals</th>
+                                <th>Cast</th>
+                                <th>Other findings</th>
+                                <th>Xray view</th>
+                                <th>Opinion</th>
+                                
+
+
+
+                                
+                              <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for form_data in blood_info %}
+                                <tr>
+                                            <td>
+                                              <a class="btn btn-sm btn-warning" href="{% url 'urine_blood_list' form_data.id %}"> <span class="fa fa-edit"></span> Edit</a>
+                                              <a class="btn btn-sm btn-danger" href="{% url 'urine_blood_delete' form_data.id %}"><span class="fa fa-trash"></span> Delete</a>
+                                              <a class="btn btn-sm btn-primary" href="{% url 'pdf_blood' form_data.id %}"><span class="fa fa-print"></span> Print</a>
+                                            
+                                            </td>
+                                            <td>{{form_data.patient_name}}</td>
+                                            <td>{{form_data.date}}</td>
+                                            <!-- <td>{{form_data.age}}</td> -->
+                                            <!-- <td>{{form_data.gender}}</td> -->
+                                            <td>{{form_data.hb}}</td>
+                                            <td>{{form_data.wbc}}</td>
+                                            <!-- <td>{{form_data.diff_wb}}</td> -->
+                                            <td>{{form_data.neutrophils}}</td>
+                                            <td>{{form_data.lymphocytes}}</td>
+                                            <td>{{form_data.eosinophils}}</td>
+                                            <td>{{form_data.monocytes}}</td>
+                                            <td>{{form_data.basophil}}</td>
+                                            <td>{{form_data.total_rbc}}</td>
+                                            <td>{{form_data.platelet_count}}</td>
+                                            <td>{{form_data.esr}}</td>
+                                            <td>{{form_data.rbsl}}</td>
+                                            <td>{{form_data.blood_group}}</td>
+                                            <td>{{form_data.urine_colour}}</td>
+                                            <td>{{form_data.urine_appearance}}</td>
+                                            <td>{{form_data.urine_odour}}</td>
+                                            <td>{{form_data.urine_ph}}</td>
+                                            <td>{{form_data.urine_gravity}}</td>
+                                            <td>{{form_data.urine_deposits}}</td>
+                                            <td>{{form_data.urine_protein}}</td>
+                                            <td>{{form_data.urine_sugar}}</td>
+                                            <td>{{form_data.microscopic_pus_cell}}</td>
+                                            <td>{{form_data.microscopic_epithelial_cell}}</td>
+                                            <td>{{form_data.microscopic_rbc_cells}}</td>
+                                            <td>{{form_data.microscopic_crystals}}</td>
+                                            <td>{{form_data.microscopic_cast}}</td>
+                                            <td>{{form_data.microscopic_other_findings}}</td>
+                                            <td>{{form_data.xray_view}}</td>
+                                            <td>{{form_data.opinion}}</td>
+                                          <td></td>
+                                    
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $("#id_username").attr("placeholder", "Enter Username");
+        $("#id_password").attr("placeholder", "Enter Password");
+    </script>
+
+<script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/buttons.flash.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/jszip.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/pdfmake.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/vfs_fonts.js' %}"></script>
+<script src="{% static 'vendor/datatables/buttons.html5.min.js' %}"></script>
+
+<script src="{% static 'vendor/datatables/moment.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/datetime-moment.js' %}"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
+<script>
+  // Call the dataTables jQuery plugin
+  $(document).ready(function() {
+    $('#maintable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+             'excel'
+        ]
+        
+    } );
+} );
+</script>
+<!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<!-- <script>
+$(document).ready(function() {
+    $('.datepicker').datepicker();
+});
+</script> -->
+<script>
+  $(document).ready(function() {
+      // $('.datepicker').datepicker();
+      $('.datepicker').datepicker({
+      
+      maxDate: '+0d',
+      changeMonth: true,
+      changeYear: true,
+      defaultDate: '18yr',
+  });
+//   var date = new Date();
+// document.getElementById("id_date").value = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+// document.getElementById("id_date").disabled = true; 
+      
+  });
+</script>
+<!-- <script>
+
+  $('#form_id').submit(function() {
+    document.getElementById("id_date").disabled = false;
+  
+      //Rest of code
+      })
+  </script> -->
+
+<script>
+  $(document).ready(function(){              
+     $('#id_triglycerides').keyup(function () {
+       var vldl = document.getElementById('id_triglycerides').value/5;
+       
+       document.getElementById('id_vldl').value = vldl.toFixed(2);
+       
+       });
+       $('#id_hdl').keyup(function () {
+       var vldl = document.getElementById('id_vldl').value;
+       var hdl = document.getElementById('id_hdl').value;
+       var tc = document.getElementById('id_total_cholesterol').value;
+       var result = tc - hdl - vldl
+
+       var ldl = document.getElementById('id_ldl').value;
+       
+       var res = ldl/hdl
+       console.log(result);
+
+       var res1 = tc/hdl
+
+       document.getElementById('id_chol_hdl_ratio').value = res1.toFixed(2);
+       document.getElementById('id_ldl').value = result.toFixed(2);
+       document.getElementById('id_ldl_hdl_ratio').value = res.toFixed(2);
+       
+       });
+       $('#id_vldl').keyup(function () {
+       var vldl = document.getElementById('id_vldl').value;
+       var hdl = document.getElementById('id_hdl').value;
+       var tc = document.getElementById('id_total_cholesterol').value;
+       var result = tc - hdl - vldl
+       console.log(result);
+       document.getElementById('id_ldl').value = result.toFixed(2);
+       
+       });
+       $('#id_total_cholesterol').keyup(function () {
+        var vldl = document.getElementById('id_vldl').value;
+       var hdl = document.getElementById('id_hdl').value;
+       var tc = document.getElementById('id_total_cholesterol').value;
+       var result = tc - hdl - vldl
+       console.log(result);
+       document.getElementById('id_ldl').value = result.toFixed(2);
+       
+       });
+
+       $('#id_eosinophils').keyup(function () {
+        var es = document.getElementById('id_eosinophils').value;
+       var ne = document.getElementById('id_neutrophils').value;
+       var ly = document.getElementById('id_lymphocytes').value;
+       var result = 100 - ne - ly - es
+       console.log(result);
+       document.getElementById('id_monocytes').value = ~~result.toFixed(2);
+       
+       });
+
+       
+
+      $('#id_bilirubin_dierct').keyup(function () {
+        var bd = document.getElementById('id_bilirubin_dierct').value;
+       var bt = document.getElementById('id_bilirubin_total').value;
+       var result = bt - bd
+       console.log(result);
+       document.getElementById('id_bilirubin_indierct').value = result.toFixed(2);
+       
+       });
+       
+
+
+
+       $('#id_albumin').keyup(function () {
+        var ab = document.getElementById('id_albumin').value;
+       var tp = document.getElementById('id_total_protein').value;
+       var result = tp - ab
+       console.log(result);
+       document.getElementById('id_globumin').value = result.toFixed(2);
+       
+       });
+       
+
+      
+       
+ });
+</script>
+
+{% endblock %}

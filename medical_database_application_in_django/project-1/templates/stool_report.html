@@ -1,0 +1,303 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block stylesheet %}
+
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
+
+{% endblock %}
+{% block body %}
+    <div id="content-wrapper">
+        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {{form.errors}}
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                
+                <li class="breadcrumb-item active">Stool Form </li>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="card-body">
+                        <form action="." role="form" id="form_id" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                {{form.stool_id}}
+                                {% csrf_token %}
+                                <div class="col-3">
+                                  {{ form.patient_name|as_crispy_field }}
+                                </div>
+                                <div class="col-3">
+                                  {{ form.date|as_crispy_field }}
+                                </div>
+                                
+                              </div>
+                             <h3 align="Center" > General Examination</h3>
+                             <div class="row">
+                                
+                                <div class="col-3">
+                                  {{ form.colour|as_crispy_field }}
+                                </div>
+                                <div class="col-3">
+                                  {{ form.consistency|as_crispy_field }}
+                                </div>
+                                <div class="col-3">
+                                    {{ form.mucus|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                    {{ form.parasites|as_crispy_field }}
+                                  </div>
+                                  
+                              </div>
+                              <div class="row">
+                                
+                                <div class="col-3">
+                                  {{ form.frank_blood|as_crispy_field }}
+                                </div>
+                                <div class="col-3">
+                                  {{ form.occult_blood|as_crispy_field }}
+                                </div>
+                                <!-- <div class="col-3">
+                                    
+                                  </div> -->
+                                  <div class="col-3">
+                                    {{ form.reaction_pH|as_crispy_field }}
+                                  </div>
+                                  
+                              </div>
+                              <h3 align="Center" >Microscopic Examination</h3>
+                              <div class="row">
+                                
+                                <div class="col-4">
+                                  {{ form.microscope_epithelial_cells|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                  {{ form.microscope_pus_cells|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                    {{ form.microscope_rbs_cells|as_crispy_field }}
+                                  </div>
+                                  
+                                  
+                              </div> 
+                              <div class="row">
+                                
+                                <div class="col-4">
+                                  {{ form.microscope_protozoa|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                  {{ form.microscope_ova|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                    {{ form.microscope_other_findings|as_crispy_field }}
+                                  </div>
+                                  
+                                  
+                              </div><br>
+
+                          
+                              <div class="row">
+                                <div class="col-3">
+                                  {{ form.hep_A|as_crispy_field }}
+                                </div>
+                                <div class="col-3">
+                                  {{ form.hep_B|as_crispy_field }}
+                                </div>
+                                <div class="col-3">
+                                  {{ form.hep_C|as_crispy_field }}
+                                </div>
+                                <div class="col-3">
+                                  {{ form.vdrl|as_crispy_field }}
+                                </div>
+
+                              </div><br>
+                              <div class="row">
+                                <div class="col-4">
+                                  {{ form.hiv1|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                  {{ form.hiv2|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                  {{ form.sputum|as_crispy_field }}
+                                </div>
+
+                              </div><br>                        
+                              <h3 align="Center" >WIDAL REPORT</h3>
+                              <div class="row">
+                                
+                                <div class="col-3">
+                                  {{ form.widal_salmonella_O|as_crispy_field }}
+                                </div>
+                                <div class="col-3">
+                                  {{ form.widal_salmonella_H|as_crispy_field }}
+                                </div>
+                                <div class="col-3">
+                                    {{ form.widal_salmonella_AH|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                    {{ form.widal_salmonella_BH|as_crispy_field }}
+                                  </div>
+                                  
+                              </div>      
+                            
+                            <br>
+                                
+                            
+                            
+                            
+                          
+                          <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                          <button class="btn btn-secondary btn-sm" type="reset">Cancel</button>
+                        </form>
+                        
+                      </div>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="maintable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Patient  Name             </th> 
+                                <th>Date </th>
+                                <!-- <th>Age </th> -->
+                                <!-- <th>Gender </th> -->
+                                <th>Colour</th>
+                                <th>Consistency</th>
+                                <th>Mucus</th>
+                                <th>Parasites</th>
+                                <th>Frank Blood</th>
+                                <th>Occult Blood</th>
+                                <!-- <th>Stercobilinogen</th> -->
+                                <th>Reaction (pH)</th>
+                                <th>Epithelial cells</th>
+                                <th>Pus cells</th>
+                                <th>Red Blood cells</th>
+                                <th>Cysts of protozoa</th>
+                                <th>Ova</th>
+                                <th>Other findings</th>
+                                <th>Salmonella Typhi -O</th>
+                                <th>Salmonella Typhi -H</th>
+                                <th>Salmonella Paratyphi -AH</th>
+                                <th>Salmonella Paratyphi -BH</th>
+                                
+
+
+
+                                
+                              <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for form_data in stool_info %}
+                                <tr>    <td>
+                                          <a class="btn btn-sm btn-warning" href="{% url 'stool_form_list' form_data.id %}"> <span class="fa fa-edit"></span> Edit</a>
+                                          <a class="btn btn-sm btn-danger" href="{% url 'stool_delete' form_data.id %}"><span class="fa fa-trash"></span> Delete</a>
+                                          <a class="btn btn-sm btn-primary" href="{% url 'pdf_stool' form_data.id %}"><span class="fa fa-print"></span> Print</a>
+
+                                        </td>
+                                        <td>{{form_data.patient_name}}</td>
+                                        <td>{{form_data.date}}</td>
+                                        <!-- <td>{{form_data.age}}</td> -->
+                                        <!-- <td>{{form_data.gender}}</td> -->
+                                        <td>{{form_data.colour}}</td>
+                                        <td>{{form_data.consistency}}</td>
+                                        <td>{{form_data.mucus}}</td>
+                                        <td>{{form_data.parasites}}</td>
+                                        <td>{{form_data.frank_blood}}</td>
+                                        <td>{{form_data.occult_blood}}</td>
+                                        <!-- <td>{{form_data.stercobilinogen}}</td> -->
+                                        <td>{{form_data.reaction_pH}}</td>
+                                        <td>{{form_data.microscope_epithelial_cells}}</td>
+                                        <td>{{form_data.microscope_pus_cells}}</td>
+                                        <td>{{form_data.microscope_rbs_cells}}</td>
+                                        <td>{{form_data.microscope_protozoa}}</td>
+                                        <td>{{form_data.microscope_ova}}</td>
+                                        <td>{{form_data.microscope_other_findings}}</td>
+                                        <td>{{form_data.widal_salmonella_O}}</td>
+                                        <td>{{form_data.widal_salmonella_H}}</td>
+                                        <td>{{form_data.widal_salmonella_AH}}</td>
+                                        <td>{{form_data.widal_salmonella_BH}}</td>
+                                          <td></td>
+                                    
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $("#id_username").attr("placeholder", "Enter Username");
+        $("#id_password").attr("placeholder", "Enter Password");
+    </script>
+
+<script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/buttons.flash.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/jszip.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/pdfmake.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/vfs_fonts.js' %}"></script>
+<script src="{% static 'vendor/datatables/buttons.html5.min.js' %}"></script>
+
+<script src="{% static 'vendor/datatables/moment.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/datetime-moment.js' %}"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
+<script>
+  // Call the dataTables jQuery plugin
+  $(document).ready(function() {
+    $('#maintable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+             'excel'
+        ]
+        
+    } );
+} );
+</script>
+<!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<!-- <script>
+$(document).ready(function() {
+    $('.datepicker').datepicker();
+});
+</script> -->
+<script>
+  $(document).ready(function() {
+      // $('.datepicker').datepicker();
+      $('.datepicker').datepicker({
+      
+      maxDate: '+0d',
+      changeMonth: true,
+      changeYear: true,
+      defaultDate: '18yr',
+  });
+//   var date = new Date();
+// document.getElementById("id_date").value = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+// document.getElementById("id_date").disabled = true;  
+  });
+</script>
+<!-- <script>
+
+  $('#form_id').submit(function() {
+    document.getElementById("id_date").disabled = false;
+  
+      //Rest of code
+      })
+  </script> -->
+
+{% endblock %}

@@ -1,0 +1,602 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block stylesheet %}
+
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
+
+{% endblock %}
+{% block body %}
+    <div id="content-wrapper">
+        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {{form.errors}}
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                
+                <li class="breadcrumb-item active">Add Details</li>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="card-body">
+                        <h2>Personal Details</h2>
+                        <form action="." role="form" id="form_id" method="post" enctype="multipart/form-data" >
+                          {% csrf_token %}
+                          <div class="row">
+                            {{form.user_id}}
+                            <div class="col-3">
+                              {{ form.fullname|as_crispy_field }}
+                            </div>
+                            <div class="col-3">
+                              {{ form.organization|as_crispy_field }}
+                            </div>
+                            <div class="col-3">
+                                {{ form.address|as_crispy_field }}
+                              </div>
+                              <div class="col-3">
+                                {{ form.department|as_crispy_field }}
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-3">
+                              {{ form.desig|as_crispy_field }}
+                            </div>
+                            <div class="col-3">
+                              {{ form.gender|as_crispy_field }}
+                            </div>
+                            <div class="col-3">
+                                {{ form.dob|as_crispy_field }}
+                              </div>
+                              <div class="col-3">
+                                {{ form.date|as_crispy_field }}
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-3">
+                              {{ form.married_stat|as_crispy_field }}
+                            </div>
+                            
+                            <div class="col-3">
+                                {{ form.age|as_crispy_field }}
+                              </div>
+                            <div class="col-3">
+                              {{ form.id_mark|as_crispy_field }}
+                            </div>
+                          </div>
+                          <div class="row"></div><br>
+                          {{ form.present_complains|as_crispy_field }}<br>
+                          
+                          
+                          
+                          
+                          <div class="card-body">
+                            
+                            <br>  
+                            <h3 align="Center">Past and Family History</h3>
+
+                            <table style="width:100%;">
+                                <tr>
+                                  <th scope="col">Diseases</th>
+                                  <th scope="col">Self</th>
+                                  <th scope="col">Father</th>
+                                  <th scope="col">Mother</th>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Hypertension</th>
+                                  <td>{{ form.self_hypertension|as_crispy_field }}</td>
+                                  <td>{{ form.father_hypertension|as_crispy_field }}</td>
+                                  <td>{{ form.mother_hypertension|as_crispy_field }}</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Diabetes</th>
+                                  <td>{{ form.self_diabetes|as_crispy_field }}</td>
+                                  <td>{{ form.father_diabetes|as_crispy_field }}</td>
+                                  <td>{{ form.mother_diabetes|as_crispy_field }}</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Heart disease</th>
+                                  <td>{{ form.self_heartdisease|as_crispy_field }}</td>
+                                  <td>{{ form.father_heartdisease|as_crispy_field }}</td>
+                                  <td>{{ form.mother_heartdisease|as_crispy_field }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Tuberculosis</th>
+                                    <td>{{ form.self_tuberculosis|as_crispy_field }}</td>
+                                    <td>{{ form.father_tuberculosis|as_crispy_field }}</td>
+                                    <td>{{ form.mother_tuberculosis|as_crispy_field }}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th scope="row">Epilepsy</th>
+                                    <td>{{ form.self_epilepsy|as_crispy_field }}</td>
+                                    <td>{{ form.father_epilepsy|as_crispy_field }}</td>
+                                    <td>{{ form.mother_epilepsy|as_crispy_field }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Cancer</th>
+                                    <td>{{ form.self_cancer|as_crispy_field }}</td>
+                                    <td>{{ form.father_cancer|as_crispy_field }}</td>
+                                    <td>{{ form.mother_cancer|as_crispy_field }}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Asthma</th>
+                                    <td>{{ form.self_asthama|as_crispy_field }}</td>
+                                    <td>{{ form.father_asthama|as_crispy_field }}</td>
+                                    <td>{{ form.mother_asthama|as_crispy_field }}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Stroke</th>
+                                    <td>{{ form.self_stroke|as_crispy_field }}</td>
+                                    <td>{{ form.father_stroke|as_crispy_field }}</td>
+                                    <td>{{ form.mother_stroke|as_crispy_field }}</td>
+                                  </tr>
+                              </table>
+                              {{ form.prev_surgiory|as_crispy_field }}
+                              {{ form.nos_of_child|as_crispy_field }}
+
+                              <h3 align="Center">Personal History</h3>
+
+                              <div class="row">
+                                <div class="col-3">
+                                  {{ form.diet|as_crispy_field }}
+                                </div>
+                                <div class="col-3">
+                                  
+                                  {{  form.addictions|as_crispy_field }}
+                                </div>
+                                <div class="col-3">
+                                    {{ form.bowel_habits|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                    {{ form.exercise|as_crispy_field }}
+                                  </div>
+                              </div>
+                              <h3 align="Center">Occupational History</h3>
+
+                              <table style="width:100%;">
+                                <tr>
+                                  <th scope="col"></th>
+                                  <th scope="col">Name of the company</th>
+                                  <th scope="col">Years</th>
+                                  <th scope="col">Nature of Job</th>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Present Job</th>
+                                  <td>{{ form.present_comp_name|as_crispy_field }}</td>
+                                  <td>{{ form.present_years_worked|as_crispy_field }}</td>
+                                  <td>{{ form.present_job_nature|as_crispy_field }}</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Previous Job</th>
+                                  <td>{{ form.previous_comp_name|as_crispy_field }}</td>
+                                  <td>{{ form.previous_years_worked|as_crispy_field }}</td>
+                                  <td>{{ form.previous_job_nature|as_crispy_field }}</td>
+                                </tr>
+                                </table>
+
+                                {{form.exposed_to_occupational_hazards|as_crispy_field}}
+
+                                <h3 align="Center">Anthropometry</h3>
+                                <div class="row">
+                                  <div class="col-4">
+                                    {{ form.height|as_crispy_field }}
+                                  </div>
+                                  <div class="col-4">
+                                    {{ form.chest_inspiration|as_crispy_field }}
+                                  </div>
+                                  <div class="col-4">
+                                      {{ form.abdominal_girth|as_crispy_field }}
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+
+                                  <div class="col-4">
+                                    {{ form.weight|as_crispy_field }}
+                                  </div>
+                                  <div class="col-4">
+                                    {{ form.expiration|as_crispy_field }}
+                                  </div>
+                                  <div class="col-4">
+                                    {{ form.bmi|as_crispy_field }}
+                                  </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                      {{ form.waist|as_crispy_field }}
+                                    </div>
+                                    <div class="col-4">
+                                      {{ form.hip|as_crispy_field }}
+                                    </div>
+                                    <div class="col-4">
+                                      
+                                    </div>
+                                </div>
+                                 
+                                <br>
+                                <h3 align="Center">Examination of Eyes </h3>
+                                <div class="row">
+                                  <div class="col-4">
+                                    {{ form.external_exam|as_crispy_field }}
+                                  </div>
+                                  <div class="col-4">
+                                    {{ form.squint_nystagmus|as_crispy_field }}
+                                  </div>
+                                  <div class="col-4">
+                                      {{ form.colour_vision|as_crispy_field }}
+                                    </div>
+                                    
+                                </div>
+
+                                <h4 align="Center">Distant Vision: </h4>
+                                <div class="row">
+                                  <div class="col-3">
+                                    {{ form.without_glasses_re|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                    {{ form.with_glasses_re|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                      {{ form.without_glasses_le|as_crispy_field }}
+                                    </div>
+                                    <div class="col-3">
+                                      {{ form.with_glasses_le|as_crispy_field }}
+                                    </div>
+                                </div>
+
+                                <h4 align="Center">Near Vision: </h4>
+                                <div class="row">
+                                  <div class="col-3">
+                                    {{ form.without_glasses_re_near|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                    {{ form.with_glasses_re_near|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                      {{ form.without_glasses_le_near|as_crispy_field }}
+                                    </div>
+                                    <div class="col-3">
+                                      {{ form.with_glasses_le_near|as_crispy_field }}
+                                    </div>
+                                </div>
+                                
+                                <h3 align="Center">General Examination </h3>
+                                <div class="row">
+                                  <div class="col-3">
+                                    {{ form.built|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                    {{ form.teeth|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                      {{ form.throat|as_crispy_field }}
+                                    </div>
+                                    <div class="col-3">
+                                      {{ form.tongue|as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-3">
+                                    {{ form.lymph_nodes|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                    {{ form.pallor|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                      {{ form.edema|as_crispy_field }}
+                                    </div>
+                                    <div class="col-3">
+                                      {{ form.thyroid|as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-3">
+                                    {{ form.tonsils|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                    {{ form.gums|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                      {{ form.nails|as_crispy_field }}
+                                    </div>
+                                    <div class="col-3">
+                                      {{ form.icterus|as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-3">
+                                    {{ form.clubbing|as_crispy_field }}
+                                  </div>
+                                  <div class="col-3">
+                                    {{ form.ecg|as_crispy_field }}
+                                  </div>
+                                  
+                                </div><br>
+                                <h3 align="Center" >Respiratory System:</h3>
+                                <div class="row">
+                                    <div class="col-6">
+                                      {{form.chest_shape|as_crispy_field}}
+                                    </div>
+                                    <div class="col-6">
+                                      {{form.trachea|as_crispy_field}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-6">
+                                    {{form.chest_movements|as_crispy_field}}
+                                  </div>
+                                  <div class="col-6">
+                                    {{form.breath_sounds|as_crispy_field}}
+                                  </div>
+                               </div>
+                               <div class="row">
+                                <div class="col-6">
+                                  {{form.adventious_sounds|as_crispy_field}}
+                                </div>
+                                
+                               </div><br>
+                               
+
+
+
+
+                                
+                                <h3 align="Center" >Gastro - Intestinal System:</h3>
+                              </div><div class="row">
+                                <div class="col-4">
+                                  {{ form.liver|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                  {{ form.abdominal_lumps|as_crispy_field }}
+                                </div>
+                                <div class="col-4">
+                                    {{ form.spleen|as_crispy_field }}
+                                  </div>
+                                  
+                              </div>
+
+                              <h3 align="Center" >Cardio Vascular system: </h3>
+                              <div class="row">
+                                <div class="col-6">
+                                  {{ form.pulse|as_crispy_field }}
+                                </div>
+                                  <div class="col-6">
+                                  {{ form.pulse_stat|as_crispy_field}}
+                                  </div>
+                                
+                              </div>
+                              <div class="row">
+                                <div class="col-6">
+                                  {{ form.blood_pressure|as_crispy_field }}
+                                </div>
+                                <div class="col-6">
+                                    {{ form.heart_sounds|as_crispy_field }}
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-6">
+                                    {{ form.peripheral_pulsations|as_crispy_field }}
+                                  </div>
+                                  <div class="col-6">
+                                    {{ form.murmur|as_crispy_field }}
+                                  </div>
+                                </div><br>
+                                <h3 align="Center" >Examination of Ear , Nose & Throat: </h3>
+                              <div class="row">
+                                  <div class="col-6">
+                                    {{ form.external_examination|as_crispy_field }}<br>
+
+                                  </div>
+                                  <div class="col-6">
+                                    {{ form.conversational_hearing|as_crispy_field }}<br>
+
+                                  </div>
+                                  
+
+                              </div>
+                              <h3 align="Center" >Central Nervous System: </h3>
+                              <div class="row">
+                                <div class="col-6">
+                                  {{ form.higher_function|as_crispy_field }}
+                                </div>
+                                <div class="col-6">
+                                  {{ form.sensory_system|as_crispy_field }}
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-6">
+                                  {{ form.tendon_reflexes|as_crispy_field }}
+                                </div>
+                                <div class="col-6">
+                                  {{ form.poisture|as_crispy_field }}
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-6">
+                                  {{ form.pshyco_makeup|as_crispy_field }}
+                                </div>
+                                <div class="col-6">
+                                  {{ form.cranial_nerves|as_crispy_field }}
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-6">
+                                  {{ form.motor_function|as_crispy_field }}
+                                </div>
+                                <div class="col-6">
+                                  {{ form.spine|as_crispy_field }}
+                                </div>
+                                
+                              </div>
+                              <div class="row">
+                                <div class="col-6">
+                                  {{ form.gait|as_crispy_field }}
+                                </div>
+                              </div>
+                              <br>
+
+
+
+
+
+
+
+
+                              {{ form.skin|as_crispy_field }}<br>
+
+                              {{ form.remarks|as_crispy_field }}
+
+                              {{ form.advice|as_crispy_field }}
+                          </div>
+
+                          
+                          <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                          <button class="btn btn-secondary btn-sm" type="reset">Cancel</button>
+                        </form>
+                      </div>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="maintable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Organization</th>
+                                <th>Address</th>
+                                <th>Department</th>
+                                <th>Designation</th>
+                                <th>Gender</th>
+                                <th>DOB</th>
+                                <th>Check Date</th>
+                                <th>Martial Stat</th>
+                                <th>Age</th>
+                                <th>Mark</th>
+                                
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for member in member_info %}
+                                <tr>
+                                  <td>
+                                    
+                                    <a class="btn btn-sm btn-warning" href="{% url 'member_list' member.id %}"> <span class="fa fa-edit"></span> Edit</a>
+                                    <a class="btn btn-sm btn-danger" href="{% url 'delete_member' member.id %}"><span class="fa fa-trash"></span> Delete</a>
+                                    <a class="btn btn-sm btn-primary" href="{% url 'pdf' patient_id=member.id %}"><span class="fa fa-print"></span> Print</a>
+
+                                  </td>
+                                    <td>{{ member.fullname }}</td>
+                                    <td>{{ member.organization }}</td>
+                                    <td>{{ member.address }}</td>
+                                    <td>{{ member.department }}</td>
+                                    <td>{{ member.desig }}</td>
+                                    <td>{{ member.gender}}</td>
+                                    <td>{{ member.dob   }}</td>
+                                    <td>{{ member.date   }}</td>
+                                    <td>{{member.married_stat}}</td>
+                                    <td>{{member.age}}</td>
+                                    <td>{{member.id_mark}}</td>
+                                    
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $("#id_username").attr("placeholder", "Enter Username");
+        $("#id_password").attr("placeholder", "Enter Password");
+    </script>
+
+<script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/buttons.flash.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/jszip.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/pdfmake.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/vfs_fonts.js' %}"></script>
+<script src="{% static 'vendor/datatables/buttons.html5.min.js' %}"></script>
+
+<script src="{% static 'vendor/datatables/moment.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/datetime-moment.js' %}"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
+<script>
+  // Call the dataTables jQuery plugin
+  $(document).ready(function() {
+    $('#maintable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+             'excel'
+        ]
+    } );
+} );
+</script>
+<!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<script>
+$(document).ready(function() {
+    // $('.datepicker').datepicker();
+    $('.datepicker').datepicker({
+    onSelect: function(value, ui) {
+        var today = new Date(), 
+        age = today.getFullYear() - ui.selectedYear;
+        // $('#age').text(age);
+        document.getElementById('id_age').value = age;
+    },
+    maxDate: '+0d',
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "-100:+0",
+    
+});
+// var date = new Date();
+// document.getElementById("id_date").value = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+// document.getElementById("id_date").disabled = true;    
+});
+
+
+</script>
+<!-- <script>
+
+  $('#form_id').submit(function() {
+    document.getElementById("id_date").disabled = false;
+  
+      //Rest of code
+      })
+  </script> -->
+
+<script>
+  $(document).ready(function(){              
+     $('#id_height').keyup(function () {
+       var height = document.getElementById('id_height').value/100;
+       var weight = document.getElementById('id_weight').value;
+       var result = weight/(height*height)
+       document.getElementById('id_bmi').value = result.toFixed(2);
+       
+       });
+       $('#id_weight').keyup(function () {
+       var height = document.getElementById('id_height').value/100;
+       var weight = document.getElementById('id_weight').value;
+       var result = weight/(height*height)
+       document.getElementById('id_bmi').value = result.toFixed(2);
+       
+       });
+ });
+</script>
+
+{% endblock %}

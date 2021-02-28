@@ -1,0 +1,487 @@
+
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block stylesheet %}
+<style>
+  table, th, td {
+
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 1%;
+    white-space: nowrap;
+  }
+  th, td {
+    padding: 5px;
+  }
+  th {
+    text-align: left;
+  }
+  @media print {
+  #print {
+    display: none;
+  }
+  @page {size: Legal landscape;}
+}
+
+  </style>
+  <style>
+    .container { 
+      height: 100;
+      position: relative;
+       
+    }
+    
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-style:none;
+  outline: none;
+  content: "";
+}
+    </style>
+    
+  
+{% endblock %}
+
+{% block main_page %}
+<!-- Begin Page Content -->
+
+<!-- Page Heading -->
+
+
+<!-- Content Row -->
+<img src="{% static 'Logo1.jpg' %} " height="150" width="500" ><br/><br/><br/><br/><br/><br/><br/>
+<div></div>
+<div class="card-body">
+                    
+  <div class="table-responsive">
+  <div class="row">
+    <table class="table table-bordered" id="maintable" width="100%" cellspacing="0">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Patient Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Designation</th>
+            <th>Date</th>
+          </tr>
+          </thead>
+          <tbody>
+            
+          <tr>
+            <td>{{patient_info.id}}</td>
+            <td>{{patient_info.fullname}}</td>
+            <td>{{patient_info.age}}</td>
+            <td>{{patient_info.gender}}</td>
+            <td>{{patient_info.desig}}</td>
+            <td id="writeDay"></td>
+        
+          </tr>
+            
+          
+          
+          </tbody>
+
+      </table>
+      <br/><br/><br/>
+     
+      <p>
+        <h3>Results</h3>
+        Left ear: {% if mean_le_data < 26  and mean_bone_le_data == 0 %}
+        Normal hearing sensitivity
+        {% elif mean_le_data < 26 and mean_bone_le_data < 26 %}
+        Normal
+        {% elif  mean_le_data >= 26 and mean_le_data <= 40 and mean_bone_le_data == 0 %}
+        Mild Hearing deficit
+        {% elif  mean_le_data >= 41 and mean_le_data <= 60 and mean_bone_le_data == 0 %}
+        Moderate Hearing deficit
+        {% elif  mean_le_data >= 61 and mean_le_data <= 80 and mean_bone_le_data == 0 %}
+        Severe Hearing deficit
+        {% elif  mean_le_data > 80 and mean_bone_le_data == 0 %}
+        Profound hearing deficit
+
+        
+
+        {% elif  mean_le_data >= 26 and mean_le_data <= 40 and mean_bone_le_data <= 26 %}
+        Mild conductive Hearing deficit
+        {% elif  mean_le_data >= 41 and mean_le_data <= 60 and mean_bone_le_data <= 26 %}
+        Moderate conductive Hearing deficit
+        {% elif  mean_le_data >= 61 and mean_le_data <= 80 and mean_bone_le_data <= 26 %}
+        Severe conductive Hearing deficit
+        {% elif  mean_le_data > 80 and mean_bone_le_data <= 26 %}
+        Profound conductive hearing deficit
+        
+
+        {% elif  mean_le_data >= 26 and mean_le_data <= 40 and mean_bone_le_data >= 26 and mean_bone_le_data <= 40 %}
+        Mild sensorineural Hearing deficit
+        {% elif  mean_le_data >= 41 and mean_le_data <= 60 and mean_bone_le_data >= 41 and mean_bone_le_data <= 60 %}
+        Moderate sensorineural Hearing deficit
+        {% elif  mean_le_data >= 61 and mean_le_data <= 80 and mean_bone_le_data >= 61 and mean_bone_le_data <= 80 %}
+        Severe sensorineural Hearing deficit
+        {% elif  mean_le_data > 80 and mean_bone_le_data > 80 %}
+        Profound sensorineural hearing deficit
+
+
+        {% elif  mean_le_data >= 41 and mean_le_data <= 60 and mean_bone_le_data >= 26 and mean_bone_le_data <= 40 %}
+        Moderate mixed Hearing deficit
+        {% elif  mean_le_data >= 61 and mean_le_data <= 80 and mean_bone_le_data >= 41 and mean_bone_le_data <= 60 %}
+        Severe mixed Hearing deficit
+        {% elif  mean_le_data > 80 and mean_bone_le_data >= 61 and mean_bone_le_data <= 80 %}
+        Profound mixed hearing deficit
+        
+
+        {% endif %}
+        <br/><br/>
+        Right ear :{% if mean_re_data < 26  and mean_bone_re_data == 0 %}
+        Normal hearing sensitivity
+        {% elif mean_re_data < 26 and mean_bone_re_data < 26 %}
+        Normal
+        {% elif  mean_re_data >= 26 and mean_re_data <= 40 and mean_bone_re_data == 0 %}
+        Mild Hearing deficit
+        {% elif  mean_re_data >= 41 and mean_re_data <= 60 and mean_bone_re_data == 0 %}
+        Moderate Hearing deficit
+        {% elif  mean_re_data >= 61 and mean_re_data <= 80 and mean_bone_re_data == 0 %}
+        Severe Hearing deficit
+        {% elif  mean_re_data > 80 and mean_bone_re_data == 0 %}
+        Profound hearing deficit
+
+        {% elif  mean_re_data >= 26 and mean_re_data <= 40 and mean_bone_re_data <= 26 %}
+        Mild conductive Hearing deficit
+        {% elif  mean_re_data >= 41 and mean_re_data <= 60 and mean_bone_re_data <= 26 %}
+        Moderate conductive Hearing deficit
+        {% elif  mean_re_data >= 61 and mean_re_data <= 80 and mean_bone_re_data <= 26 %}
+        Severe conductive Hearing deficit
+        {% elif  mean_re_data > 80 and mean_bone_re_data <= 26 %}
+        Profound conductive hearing deficit
+        
+
+        {% elif  mean_re_data >= 26 and mean_re_data <= 40 and mean_bone_re_data >= 26 and mean_bone_re_data <= 40 %}
+        Mild sensorineural Hearing deficit
+        {% elif  mean_re_data >= 41 and mean_re_data <= 60 and mean_bone_re_data >= 41 and mean_bone_re_data <= 60 %}
+        Moderate sensorineural Hearing deficit
+        {% elif  mean_re_data >= 61 and mean_re_data <= 80 and mean_bone_re_data >= 61 and mean_bone_re_data <= 80 %}
+        Severe sensorineural Hearing deficit
+        {% elif  mean_re_data > 80 and mean_bone_re_data > 80 %}
+        Profound sensorineural hearing deficit
+
+
+        {% elif  mean_le_data >= 41 and mean_le_data <= 60 and mean_bone_le_data >= 26 and mean_bone_le_data <= 40 %}
+        Moderate mixed Hearing deficit
+        {% elif  mean_le_data >= 61 and mean_le_data <= 80 and mean_bone_le_data >= 41 and mean_bone_le_data <= 60 %}
+        Severe mixed Hearing deficit
+        {% elif  mean_le_data > 80 and mean_bone_le_data >= 61 and mean_bone_le_data <= 80 %}
+        Profound mixed hearing deficit
+        
+
+        {% endif %}
+      </p>
+      
+      
+  </div>
+</div>
+<br>
+Air<p align="left" > 
+          
+  <p align="left" style="padding-left: 50px;"> 
+
+    X = Left ear
+  </p>
+  <p align="left" style="padding-left: 50px;"> 
+
+    O = Right ear 
+  </p>  
+</p> 
+Bone<p align="left" > 
+        
+<p align="left" style="padding-left: 50px;"> 
+
+       <span>&#x25B2;</span> = Left ear
+</p>
+<p align="left" style="padding-left: 50px;"> 
+
+  <svg width="10" height="10">
+    <rect width="10" height="10" style="fill:rgb(255,255,255);stroke-width:3;stroke:rgb(0,0,0)" />
+      
+  </svg> = Right ear 
+</p>  
+</p> 
+<div class="container">
+  <div class="center">
+    <button id="print" onclick="window.print()" value="Print">Print</button>
+    
+    
+  </div>
+</div>
+
+
+
+<br/><br/><br/><br/><br/>
+<div id="parentContainer" style="width: 100%; position:relative " >
+  <div  style="float: left; width: 50%; height: 260px;"><canvas id="audiogram"  ></canvas></div>
+  <div  style="float: right; width: 50%; height: 260px; "><canvas id="audiogram1"  ></canvas></div>
+</div>
+
+  <div class="row">
+
+    <div class="card-body">
+                    
+      <div class="table-responsive">
+          <table  id="maintable" width="100%" cellspacing="0">
+              <thead>
+              <tr>
+                
+              </tr>
+              </thead>
+              <tbody>
+                
+              <tr>
+              </tr>  
+
+              
+              
+              
+              </tbody>
+              
+
+          </table>
+          
+      </div>
+  </div>
+  <br/>
+  
+  <!-- <p align="center"> 
+    center align content 
+</p> 
+  <p align="right"> 
+    Right align content 
+</p>  -->
+  </div>
+
+  
+
+  
+
+</div>
+
+
+
+
+
+{% endblock %}
+
+
+{% block custom_javascript %}
+
+<script>
+var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+var today  = new Date();
+document.getElementById("writeDay").innerHTML = today.toLocaleDateString("en-US", options);</script>
+
+
+<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+<script src="{% static 'vendor/chart.js/moment.js' %}"></script>
+<script src="{% static 'vendor/chart.js/chartjs-adapter-moment-0.1.1.js' %}"></script>
+  
+<script>
+  
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  
+
+
+var labels = ["125", "250", "500", "1K", "2K", "4K", "6K", "8K"];
+var dataRight =[{% for val in graph_data%}{{ val.bone_le_ear_250 }},{{ val.bone_le_ear_500 }},{{ val.bone_le_ear_1K }},{{ val.bone_le_ear_2K }},{{ val.bone_le_ear_4K }}{%endfor%}];
+var dataLeft = [{% for val in graph_data%}{{ val.le_ear_125 }},{{ val.le_ear_250 }},{{ val.le_ear_500 }},{{ val.le_ear_1K }},{{ val.le_ear_2K }},{{ val.le_ear_4K }},{{ val.le_ear_6K }},{{ val.le_ear_8K }}{%endfor%}];
+
+
+var data = {
+  labels: labels,
+  datasets: [{
+    label: "Left Bone Condition",
+    fill: false,
+    backgroundColor: "black",
+    borderColor: "red",
+    pointBorderColor: "purple",
+    pointBackgroundColor: "purple",
+    pointBorderWidth: 1,
+    pointHoverRadius: 4,
+    pointHoverBackgroundColor: "purple",
+    pointHoverBorderColor: "purple",
+    pointHoverBorderWidth: 2,
+    tension: 0,
+    data: dataRight,
+    pointStyle: 'triangle',
+    pointRadius:     8,
+  }, {
+    label: "Left Air Condition",
+    fill: false,
+    backgroundColor: "black",
+    borderColor: "blue",
+    pointBorderColor: "purple",
+    pointBackgroundColor: "purple",
+    pointBorderWidth: 1,
+    pointHoverRadius: 4,
+    pointHoverBackgroundColor: "purple",
+    pointHoverBorderColor: "purple",
+    pointHoverBorderWidth: 2,
+    tension: 0,
+    data: dataLeft,
+    pointStyle: 'star',
+    pointRadius:     15,
+  }]
+};
+
+var context = document.getElementById('audiogram');
+var chart = new Chart(context, {
+  type: 'line',
+  data: data,
+  options: {
+    scaleOverride: true,
+    scaleSteps: 10,
+    scaleStartValue: -10,
+    scales: {
+      xAxes: [{
+        position: "top",
+        scaleLabel: {
+          display: true,
+          labelString: "Frequency (Hz)",
+          fontFamily: "Montserrat",
+          fontColor: "black",
+        },
+        ticks: {
+          fontFamily: "Montserrat",
+        }
+      }],
+      yAxes: [{
+        position: "left",
+        scaleLabel: {
+          display: true,
+          labelString: "dB",
+          fontFamily: "Montserrat",
+          fontColor: "black",
+        },
+        ticks: {
+          fontFamily: "Montserrat",
+          reverse: true,
+          min: -10,
+          max: 120,
+        },
+      }],
+    },
+  }
+});
+
+</script>
+<script>
+  
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+var labels = ["125", "250", "500", "1K", "2K", "4K", "6K", "8K"];
+var dataRight =[{% for val in graph_data%}{{ val.re_ear_125 }},{{ val.re_ear_250 }},{{ val.re_ear_500 }},{{ val.re_ear_1K }},{{ val.re_ear_2K }},{{ val.re_ear_4K }},{{ val.re_ear_6K }},{{ val.re_ear_8K }}{%endfor%}];
+var dataLeft = [{% for val in graph_data%}{{ val.bone_re_ear_250 }},{{ val.bone_re_ear_500 }},{{ val.bone_re_ear_1K }},{{ val.bone_re_ear_2K }},{{ val.bone_re_ear_4K }}{%endfor%}];
+
+var data = {
+  labels: labels,
+  datasets: [{
+    label: "Right Air Condition",
+    fill: false,
+    backgroundColor: "black",
+    borderColor: "red",
+    pointBorderColor: "purple",
+    pointBackgroundColor: "purple",
+    pointBorderWidth: 1,
+    pointHoverRadius: 4,
+    pointHoverBackgroundColor: "purple",
+    pointHoverBorderColor: "purple",
+    pointHoverBorderWidth: 2,
+    tension: 0,
+    data: dataRight,
+    pointStyle: 'circle',
+    pointRadius:     8,
+  }, {
+    label: "Right Bone Condition",
+    fill: false,
+    backgroundColor: "black",
+    borderColor: "blue",
+    pointBorderColor: "purple",
+    pointBackgroundColor: "purple",
+    pointBorderWidth: 1,
+    pointHoverRadius: 4,
+    pointHoverBackgroundColor: "purple",
+    pointHoverBorderColor: "purple",
+    pointHoverBorderWidth: 2,
+    tension: 0,
+    data: dataLeft,
+    pointStyle: 'rect',
+    pointRadius:     8,
+  }]
+};
+
+var context = document.getElementById('audiogram1');
+var chart = new Chart(context, {
+  type: 'line',
+  data: data,
+  options: {
+    scaleOverride: true,
+    scaleSteps: 10,
+    scaleStartValue: -10,
+    scales: {
+      xAxes: [{
+        position: "top",
+        scaleLabel: {
+          display: true,
+          labelString: "Frequency (Hz)",
+          fontFamily: "Montserrat",
+          fontColor: "black",
+        },
+        ticks: {
+          fontFamily: "Montserrat",
+        }
+      }],
+      yAxes: [{
+        position: "left",
+        scaleLabel: {
+          display: true,
+          labelString: "dB",
+          fontFamily: "Montserrat",
+          fontColor: "black",
+        },
+        ticks: {
+          fontFamily: "Montserrat",
+          reverse: true,
+          min: -10,
+          max: 120,
+        },
+      }],
+    },
+  }
+});
+
+</script>
+
+{% endblock %}

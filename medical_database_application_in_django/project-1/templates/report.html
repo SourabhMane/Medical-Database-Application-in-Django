@@ -1,0 +1,932 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block stylesheet %}
+
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
+
+{% endblock %}
+{% block body %}
+    <div id="content-wrapper">
+        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {{form.errors}}
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                
+                <li class="breadcrumb-item active">Reports Section </li>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="card-body">
+                        <form action="." role="form" id="form_id" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            <br>
+                                
+                            
+                            
+                            
+                          
+                          <button class="btn btn-primary btn-sm" type="submit">Search</button>
+                        </form>
+                        
+                      </div>
+                </div>
+                <div class="card-body">
+                    <h3>Patient Details</h3>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="maintable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <!-- <th></th> -->
+                                <th>fullname</th>
+                                <th>organization</th>
+                                <th>address</th>
+                                <th>department</th>
+                                <th>id_mark</th>
+                                <th>date</th>
+                                <th>dob</th>
+                                <th>gender</th>
+                                <th>married_stat</th>
+                                <th>desig</th>
+                                <th>age</th>
+                                <th>present_complains</th>
+                                <th>self_hypertension</th>
+                                <th>self_diabetes</th>
+                                <th>self_heartdisease</th>
+                                <th>self_tuberculosis</th>
+                                <th>self_cancer</th>
+                                <th>self_asthama</th>
+                                <th>self_stroke</th>
+                                <th>self_epilepsy</th>
+                                <th>father_hypertension</th>
+                                <th>father_diabetes</th>
+                                <th>father_heartdisease</th>
+                                <th>father_tuberculosis</th>
+                                <th>father_cancer</th>
+                                <th>father_asthama</th>
+                                <th>father_stroke</th>
+                                <th>father_epilepsy</th>
+                                <th>mother_hypertension</th>
+                                <th>mother_diabetes</th>
+                                <th>mother_heartdisease</th>
+                                <th>mother_tuberculosis</th>
+                                <th>mother_cancer</th>
+                                <th>mother_asthama</th>
+                                <th>mother_stroke</th>
+                                <th>mother_epilepsy</th>
+                                <th>prev_surgiory</th>
+                                <th>nos_of_child</th>
+                                <th>diet</th>
+                                <th>addictions</th>
+                                <th>bowel_habits</th>
+                                <th>exercise</th>
+                                <th>present_comp_name</th>
+                                <th>present_years_worked</th>
+                                <th>present_job_nature</th>
+                                <th>previous_comp_name</th>
+                                <th>previous_years_worked</th>
+                                <th>previous_job_nature</th>
+                                <th>exposed_to_occupational_hazards</th>
+                                <th>height</th>
+                                <th>chest_inspiration</th>
+                                <th>abdominal_girth</th>
+                                <th>weight</th>
+                                <th>expiration</th>
+                                <th>bmi</th>
+                                <th>external_exam</th>
+                                <th>squint_nystagmus</th>
+                                <th>colour_vision</th>
+                                <th>without_glasses_re</th>
+                                <th>with_glasses_re</th>
+                                <th>without_glasses_le</th>
+                                <th>with_glasses_le</th>
+                                <th>without_glasses_re_near</th>
+                                <th>with_glasses_re_near</th>
+                                <th>without_glasses_le_near</th>
+                                <th>with_glasses_le_near</th>
+                                <th>built</th>
+                                <th>teeth</th>
+                                <th>throat</th>
+                                <th>tongue</th>
+                                <th>lymph_nodes</th>
+                                <th>pallor</th>
+                                <th>edema</th>
+                                <th>thyroid</th>
+                                <th>tonsils</th>
+                                <th>gums</th>
+                                <th>nails</th>
+                                <th>icterus</th>
+                                <th>pulse</th>
+                                <th>blood_pressure</th>
+                                <th>heart_sounds</th>
+                                <th>peripheral_pulsations</th>
+                                <th>murmur</th>
+                                <th>liver</th>
+                                <th>abdominal_lumps</th>
+                                <th>spleen</th>
+                                <th>skin</th>
+                                <th>remarks</th>
+                                <th>advice</th>
+                                <th>clubbing</th>
+                                <th>ecg</th>
+                                <th>pulse_stat</th>
+                                <th>higher_function</th>
+                                <th>sensory_system</th>
+                                <th>tendon_reflexes</th>
+                                <th>poisture</th>
+                                <th>pshyco_makeup</th>
+                                <th>cranial_nerves</th>
+                                <th>motor_function</th>
+                                <th>spine</th>
+                                <th>gait</th>
+                                <th>external_examination</th>
+                                <th>conversational_hearing</th>
+                                <th>chest_shape</th>
+                                <th>trachea</th>
+                                <th>chest_movements</th>
+                                <th>breath_sounds</th>
+                                <th>adventious_sounds</th>
+                                <th>waist</th>
+                                <th>hip</th>
+                                
+
+
+
+                                
+                              <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for patient_data in patient_res %}
+                                <tr>    
+                                            <!-- <td></td> -->
+                                            <td>{{patient_data.fullname}}</td>
+                                            <td>{{patient_data.organization}}</td>
+                                            <td>{{patient_data.address}}</td>
+                                            <td>{{patient_data.department}}</td>
+                                            <td>{{patient_data.id_mark}}</td>
+                                            <td>{{patient_data.date}}</td>
+                                            <td>{{patient_data.dob}}</td>
+                                            <td>{{patient_data.gender}}</td>
+                                            <td>{{patient_data.married_stat}}</td>
+                                            <td>{{patient_data.desig}}</td>
+                                            <td>{{patient_data.age}}</td>
+                                            <td>{{patient_data.present_complains}}</td>
+                                            <td>{{patient_data.self_hypertension}}</td>
+                                            <td>{{patient_data.self_diabetes}}</td>
+                                            <td>{{patient_data.self_heartdisease}}</td>
+                                            <td>{{patient_data.self_tuberculosis}}</td>
+                                            <td>{{patient_data.self_cancer}}</td>
+                                            <td>{{patient_data.self_asthama}}</td>
+                                            <td>{{patient_data.self_stroke}}</td>
+                                            <td>{{patient_data.self_epilepsy}}</td>
+                                            <td>{{patient_data.father_hypertension}}</td>
+                                            <td>{{patient_data.father_diabetes}}</td>
+                                            <td>{{patient_data.father_heartdisease}}</td>
+                                            <td>{{patient_data.father_tuberculosis}}</td>
+                                            <td>{{patient_data.father_cancer}}</td>
+                                            <td>{{patient_data.father_asthama}}</td>
+                                            <td>{{patient_data.father_stroke}}</td>
+                                            <td>{{patient_data.father_epilepsy}}</td>
+                                            <td>{{patient_data.mother_hypertension}}</td>
+                                            <td>{{patient_data.mother_diabetes}}</td>
+                                            <td>{{patient_data.mother_heartdisease}}</td>
+                                            <td>{{patient_data.mother_tuberculosis}}</td>
+                                            <td>{{patient_data.mother_cancer}}</td>
+                                            <td>{{patient_data.mother_asthama}}</td>
+                                            <td>{{patient_data.mother_stroke}}</td>
+                                            <td>{{patient_data.mother_epilepsy}}</td>
+                                            <td>{{patient_data.prev_surgiory}}</td>
+                                            <td>{{patient_data.nos_of_child}}</td>
+                                            <td>{{patient_data.diet}}</td>
+                                            <td>{{patient_data.addictions}}</td>
+                                            <td>{{patient_data.bowel_habits}}</td>
+                                            <td>{{patient_data.exercise}}</td>
+                                            <td>{{patient_data.present_comp_name}}</td>
+                                            <td>{{patient_data.present_years_worked}}</td>
+                                            <td>{{patient_data.present_job_nature}}</td>
+                                            <td>{{patient_data.previous_comp_name}}</td>
+                                            <td>{{patient_data.previous_years_worked}}</td>
+                                            <td>{{patient_data.previous_job_nature}}</td>
+                                            <td>{{patient_data.exposed_to_occupational_hazards}}</td>
+                                            <td>{{patient_data.height}}</td>
+                                            <td>{{patient_data.chest_inspiration}}</td>
+                                            <td>{{patient_data.abdominal_girth}}</td>
+                                            <td>{{patient_data.weight}}</td>
+                                            <td>{{patient_data.expiration}}</td>
+                                            <td>{{patient_data.bmi}}</td>
+                                            <td>{{patient_data.external_exam}}</td>
+                                            <td>{{patient_data.squint_nystagmus}}</td>
+                                            <td>{{patient_data.colour_vision}}</td>
+                                            <td>{{patient_data.without_glasses_re}}</td>
+                                            <td>{{patient_data.with_glasses_re}}</td>
+                                            <td>{{patient_data.without_glasses_le}}</td>
+                                            <td>{{patient_data.with_glasses_le}}</td>
+                                            <td>{{patient_data.without_glasses_re_near}}</td>
+                                            <td>{{patient_data.with_glasses_re_near}}</td>
+                                            <td>{{patient_data.without_glasses_le_near}}</td>
+                                            <td>{{patient_data.with_glasses_le_near}}</td>
+                                            <td>{{patient_data.built}}</td>
+                                            <td>{{patient_data.teeth}}</td>
+                                            <td>{{patient_data.throat}}</td>
+                                            <td>{{patient_data.tongue}}</td>
+                                            <td>{{patient_data.lymph_nodes}}</td>
+                                            <td>{{patient_data.pallor}}</td>
+                                            <td>{{patient_data.edema}}</td>
+                                            <td>{{patient_data.thyroid}}</td>
+                                            <td>{{patient_data.tonsils}}</td>
+                                            <td>{{patient_data.gums}}</td>
+                                            <td>{{patient_data.nails}}</td>
+                                            <td>{{patient_data.icterus}}</td>
+                                            <td>{{patient_data.pulse}}</td>
+                                            <td>{{patient_data.blood_pressure}}</td>
+                                            <td>{{patient_data.heart_sounds}}</td>
+                                            <td>{{patient_data.peripheral_pulsations}}</td>
+                                            <td>{{patient_data.murmur}}</td>
+                                            <td>{{patient_data.liver}}</td>
+                                            <td>{{patient_data.abdominal_lumps}}</td>
+                                            <td>{{patient_data.spleen}}</td>
+                                            <td>{{patient_data.skin}}</td>
+                                            <td>{{patient_data.remarks}}</td>
+                                            <td>{{patient_data.advice}}</td>
+                                            <td>{{patient_data.clubbing}}</td>
+                                            <td>{{patient_data.ecg}}</td>
+                                            <td>{{patient_data.pulse_stat}}</td>
+                                            <td>{{patient_data.higher_function}}</td>
+                                            <td>{{patient_data.sensory_system}}</td>
+                                            <td>{{patient_data.tendon_reflexes}}</td>
+                                            <td>{{patient_data.poisture}}</td>
+                                            <td>{{patient_data.pshyco_makeup}}</td>
+                                            <td>{{patient_data.cranial_nerves}}</td>
+                                            <td>{{patient_data.motor_function}}</td>
+                                            <td>{{patient_data.spine}}</td>
+                                            <td>{{patient_data.gait}}</td>
+                                            <td>{{patient_data.external_examination}}</td>
+                                            <td>{{patient_data.conversational_hearing}}</td>
+                                            <td>{{patient_data.chest_shape}}</td>
+                                            <td>{{patient_data.trachea}}</td>
+                                            <td>{{patient_data.chest_movements}}</td>
+                                            <td>{{patient_data.breath_sounds}}</td>
+                                            <td>{{patient_data.adventious_sounds}}</td>
+                                            <td>{{patient_data.waist}}</td>
+                                            <td>{{patient_data.hip}}</td>
+                                             <td></td>
+                                    
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="table-responsive">
+                        <h3>Blood Urine Xray Report</h3>
+                        
+                        <table class="table table-bordered" id="maintable1" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>patient_name</th>
+                                <th>date</th>
+                                <th>hb</th>
+                                <th>wbc</th>
+                                <th>neutrophils</th>
+                                <th>lymphocytes</th>
+                                <th>eosinophils</th>
+                                <th>monocytes</th>
+                                <th>basophil</th>
+                                <th>total_rbc</th>
+                                <th>platelet_count</th>
+                                <th>esr</th>
+                                <th>rbsl</th>
+                                <th>blood_group</th>
+                                <th>urine_colour</th>
+                                <th>urine_appearance</th>
+                                <th>urine_odour</th>
+                                <th>urine_ph</th>
+                                <th>urine_gravity</th>
+                                <th>urine_deposits</th>
+                                <th>urine_protein</th>
+                                <th>urine_sugar</th>
+                                <th>microscopic_pus_cell</th>
+                                <th>microscopic_epithelial_cell</th>
+                                <th>microscopic_rbc_cells</th>
+                                <th>microscopic_crystals</th>
+                                <th>microscopic_cast</th>
+                                <th>microscopic_other_findings</th>
+                                <th>xray_view</th>
+                                <th>opinion</th>
+                                <th>total_cholesterol</th>
+                                <th>triglycerides</th>
+                                <th>hdl</th>
+                                <th>ldl</th>
+                                <th>vldl</th>
+                                <th>sgot</th>
+                                <th>sgpt</th>
+                                <th>blood_urea</th>
+                                <th>se_creatinin</th>
+                                <th>bilirubin_total</th>
+                                <th>bilirubin_dierct</th>
+                                <th>alkaline_phosphatase</th>
+                                <th>uric_acid</th>
+                                <th>fbsl</th>
+                                <th>ppbsl</th>
+                                <th>ldl_hdl_ratio</th>
+                                <th>chol_hdl_ratio</th>
+                                <th>total_protein</th>
+                                <th>albumin</th>
+                                <th>globumin</th>
+                                <th>bilirubin_indierct</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for blood_list in blood_res %}
+                            {% for blood_data in blood_list %}
+                                <tr>    
+                                    <td>{{blood_data.patient_name}}</td>
+                                    <td>{{blood_data.date}}</td>
+                                    <td>{{blood_data.hb}}</td>
+                                    <td>{{blood_data.wbc}}</td>
+                                    <td>{{blood_data.neutrophils}}</td>
+                                    <td>{{blood_data.lymphocytes}}</td>
+                                    <td>{{blood_data.eosinophils}}</td>
+                                    <td>{{blood_data.monocytes}}</td>
+                                    <td>{{blood_data.basophil}}</td>
+                                    <td>{{blood_data.total_rbc}}</td>
+                                    <td>{{blood_data.platelet_count}}</td>
+                                    <td>{{blood_data.esr}}</td>
+                                    <td>{{blood_data.rbsl}}</td>
+                                    <td>{{blood_data.blood_group}}</td>
+                                    <td>{{blood_data.urine_colour}}</td>
+                                    <td>{{blood_data.urine_appearance}}</td>
+                                    <td>{{blood_data.urine_odour}}</td>
+                                    <td>{{blood_data.urine_ph}}</td>
+                                    <td>{{blood_data.urine_gravity}}</td>
+                                    <td>{{blood_data.urine_deposits}}</td>
+                                    <td>{{blood_data.urine_protein}}</td>
+                                    <td>{{blood_data.urine_sugar}}</td>
+                                    <td>{{blood_data.microscopic_pus_cell}}</td>
+                                    <td>{{blood_data.microscopic_epithelial_cell}}</td>
+                                    <td>{{blood_data.microscopic_rbc_cells}}</td>
+                                    <td>{{blood_data.microscopic_crystals}}</td>
+                                    <td>{{blood_data.microscopic_cast}}</td>
+                                    <td>{{blood_data.microscopic_other_findings}}</td>
+                                    <td>{{blood_data.xray_view}}</td>
+                                    <td>{{blood_data.opinion}}</td>
+                                    <td>{{blood_data.total_cholesterol}}</td>
+                                    <td>{{blood_data.triglycerides}}</td>
+                                    <td>{{blood_data.hdl}}</td>
+                                    <td>{{blood_data.ldl}}</td>
+                                    <td>{{blood_data.vldl}}</td>
+                                    <td>{{blood_data.sgot}}</td>
+                                    <td>{{blood_data.sgpt}}</td>
+                                    <td>{{blood_data.blood_urea}}</td>
+                                    <td>{{blood_data.se_creatinin}}</td>
+                                    <td>{{blood_data.bilirubin_total}}</td>
+                                    <td>{{blood_data.bilirubin_dierct}}</td>
+                                    <td>{{blood_data.alkaline_phosphatase}}</td>
+                                    <td>{{blood_data.uric_acid}}</td>
+                                    <td>{{blood_data.fbsl}}</td>
+                                    <td>{{blood_data.ppbsl}}</td>
+                                    <td>{{blood_data.ldl_hdl_ratio}}</td>
+                                    <td>{{blood_data.chol_hdl_ratio}}</td>
+                                    <td>{{blood_data.total_protein}}</td>
+                                    <td>{{blood_data.albumin}}</td>
+                                    <td>{{blood_data.globumin}}</td>
+                                    <td>{{blood_data.bilirubin_indierct}}</td>
+                                    
+                                </tr>
+                            {% endfor %}
+                            {% endfor %}
+                            {% if blood_from_to %}
+                            {% for blood_data in blood_from_to %}
+                            
+                                <tr>    
+                                    <td>{{blood_data.patient_name}}</td>
+                                    <td>{{blood_data.date}}</td>
+                                    <td>{{blood_data.hb}}</td>
+                                    <td>{{blood_data.wbc}}</td>
+                                    <td>{{blood_data.neutrophils}}</td>
+                                    <td>{{blood_data.lymphocytes}}</td>
+                                    <td>{{blood_data.eosinophils}}</td>
+                                    <td>{{blood_data.monocytes}}</td>
+                                    <td>{{blood_data.basophil}}</td>
+                                    <td>{{blood_data.total_rbc}}</td>
+                                    <td>{{blood_data.platelet_count}}</td>
+                                    <td>{{blood_data.esr}}</td>
+                                    <td>{{blood_data.rbsl}}</td>
+                                    <td>{{blood_data.blood_group}}</td>
+                                    <td>{{blood_data.urine_colour}}</td>
+                                    <td>{{blood_data.urine_appearance}}</td>
+                                    <td>{{blood_data.urine_odour}}</td>
+                                    <td>{{blood_data.urine_ph}}</td>
+                                    <td>{{blood_data.urine_gravity}}</td>
+                                    <td>{{blood_data.urine_deposits}}</td>
+                                    <td>{{blood_data.urine_protein}}</td>
+                                    <td>{{blood_data.urine_sugar}}</td>
+                                    <td>{{blood_data.microscopic_pus_cell}}</td>
+                                    <td>{{blood_data.microscopic_epithelial_cell}}</td>
+                                    <td>{{blood_data.microscopic_rbc_cells}}</td>
+                                    <td>{{blood_data.microscopic_crystals}}</td>
+                                    <td>{{blood_data.microscopic_cast}}</td>
+                                    <td>{{blood_data.microscopic_other_findings}}</td>
+                                    <td>{{blood_data.xray_view}}</td>
+                                    <td>{{blood_data.opinion}}</td>
+                                    <td>{{blood_data.total_cholesterol}}</td>
+                                    <td>{{blood_data.triglycerides}}</td>
+                                    <td>{{blood_data.hdl}}</td>
+                                    <td>{{blood_data.ldl}}</td>
+                                    <td>{{blood_data.vldl}}</td>
+                                    <td>{{blood_data.sgot}}</td>
+                                    <td>{{blood_data.sgpt}}</td>
+                                    <td>{{blood_data.blood_urea}}</td>
+                                    <td>{{blood_data.se_creatinin}}</td>
+                                    <td>{{blood_data.bilirubin_total}}</td>
+                                    <td>{{blood_data.bilirubin_dierct}}</td>
+                                    <td>{{blood_data.alkaline_phosphatase}}</td>
+                                    <td>{{blood_data.uric_acid}}</td>
+                                    <td>{{blood_data.fbsl}}</td>
+                                    <td>{{blood_data.ppbsl}}</td>
+                                    <td>{{blood_data.ldl_hdl_ratio}}</td>
+                                    <td>{{blood_data.chol_hdl_ratio}}</td>
+                                    <td>{{blood_data.total_protein}}</td>
+                                    <td>{{blood_data.albumin}}</td>
+                                    <td>{{blood_data.globumin}}</td>
+                                    <td>{{blood_data.bilirubin_indierct}}</td>
+                                    
+                                </tr>
+                            {% endfor %}
+                            {% endif %}
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="table-responsive">
+                        <h3>Stool Report</h3>
+                        <table class="table table-bordered" id="maintable2" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>patient_name</th>
+                                <th>date</th>
+                                <!-- <th>age</th>
+                                <th>gender</th> -->
+                                <th>colour</th>
+                                <th>consistency</th>
+                                <th>mucus</th>
+                                <th>parasites</th>
+                                <th>frank_blood</th>
+                                <th>occult_blood</th>
+                                <th>reaction_pH</th>
+                                <th>microscope_epithelial_cells</th>
+                                <th>microscope_pus_cells</th>
+                                <th>microscope_rbs_cells</th>
+                                <th>microscope_protozoa</th>
+                                <th>microscope_ova</th>
+                                <th>microscope_other_findings</th>
+                                <th>widal_salmonella_O</th>
+                                <th>widal_salmonella_H</th>
+                                <th>widal_salmonella_AH</th>
+                                <th>widal_salmonella_BH</th>
+                                <th>hep_A</th>
+                                <th>hep_B</th>
+                                <th>hep_C</th>
+                                <th>vdrl</th>
+                                <th>hiv1</th>
+                                <th>hiv2</th>
+                                <th>sputum</th>  
+                                
+
+
+
+                                
+                              
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for stool_dat in stool_res %}
+                            {% for stool_data in stool_dat %}
+                                <tr>    
+                                    <td>{{stool_data.patient_name}}</td>
+                                    <td>{{stool_data.date}}</td>
+                                    <!-- <td>{{stool_data.age}}</td>
+                                    <td>{{stool_data.gender}}</td> -->
+                                    <td>{{stool_data.colour}}</td>
+                                    <td>{{stool_data.consistency}}</td>
+                                    <td>{{stool_data.mucus}}</td>
+                                    <td>{{stool_data.parasites}}</td>
+                                    <td>{{stool_data.frank_blood}}</td>
+                                    <td>{{stool_data.occult_blood}}</td>
+                                    <td>{{stool_data.reaction_pH}}</td>
+                                    <td>{{stool_data.microscope_epithelial_cells}}</td>
+                                    <td>{{stool_data.microscope_pus_cells}}</td>
+                                    <td>{{stool_data.microscope_rbs_cells}}</td>
+                                    <td>{{stool_data.microscope_protozoa}}</td>
+                                    <td>{{stool_data.microscope_ova}}</td>
+                                    <td>{{stool_data.microscope_other_findings}}</td>
+                                    <td>{{stool_data.widal_salmonella_O}}</td>
+                                    <td>{{stool_data.widal_salmonella_H}}</td>
+                                    <td>{{stool_data.widal_salmonella_AH}}</td>
+                                    <td>{{stool_data.widal_salmonella_BH}}</td>
+                                    <td>{{stool_data.hep_A}}</td>
+                                    <td>{{stool_data.hep_B}}</td>
+                                    <td>{{stool_data.hep_C}}</td>
+                                    <td>{{stool_data.vdrl}}</td>
+                                    <td>{{stool_data.hiv1}}</td>
+                                    <td>{{stool_data.hiv2}}</td>
+                                    <td>{{stool_data.sputum}}</td>
+                                </tr>
+                            {% endfor %}
+                            {% endfor %}
+                            {% if stool_from_to %}
+                            {% for stool_data in stool_from_to %}
+                                <tr>    
+                                    <td>{{stool_data.patient_name}}</td>
+                                    <td>{{stool_data.date}}</td>
+                                    <!-- <td>{{stool_data.age}}</td> -->
+                                    <!-- <td>{{stool_data.gender}}</td> -->
+                                    <td>{{stool_data.colour}}</td>
+                                    <td>{{stool_data.consistency}}</td>
+                                    <td>{{stool_data.mucus}}</td>
+                                    <td>{{stool_data.parasites}}</td>
+                                    <td>{{stool_data.frank_blood}}</td>
+                                    <td>{{stool_data.occult_blood}}</td>
+                                    <td>{{stool_data.reaction_pH}}</td>
+                                    <td>{{stool_data.microscope_epithelial_cells}}</td>
+                                    <td>{{stool_data.microscope_pus_cells}}</td>
+                                    <td>{{stool_data.microscope_rbs_cells}}</td>
+                                    <td>{{stool_data.microscope_protozoa}}</td>
+                                    <td>{{stool_data.microscope_ova}}</td>
+                                    <td>{{stool_data.microscope_other_findings}}</td>
+                                    <td>{{stool_data.widal_salmonella_O}}</td>
+                                    <td>{{stool_data.widal_salmonella_H}}</td>
+                                    <td>{{stool_data.widal_salmonella_AH}}</td>
+                                    <td>{{stool_data.widal_salmonella_BH}}</td>
+                                    <td>{{stool_data.hep_A}}</td>
+                                    <td>{{stool_data.hep_B}}</td>
+                                    <td>{{stool_data.hep_C}}</td>
+                                    <td>{{stool_data.vdrl}}</td>
+                                    <td>{{stool_data.hiv1}}</td>
+                                    <td>{{stool_data.hiv2}}</td>
+                                    <td>{{stool_data.sputum}}</td>
+                                </tr>
+                            {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="table-responsive">
+                        <h3>Audiometry Report</h3>
+                        <table class="table table-bordered" id="maintable3" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <td>patient_name</td>
+                                <td>date</td>
+                                <td>le_ear_125</td>
+                                <td>le_ear_250</td>
+                                <td>le_ear_500</td>
+                                <td>le_ear_1K</td>
+                                <td>le_ear_2K</td>
+                                <td>le_ear_4K</td>
+                                <td>le_ear_6K</td>
+                                <td>le_ear_8K</td>
+                                <td>re_ear_125</td>
+                                <td>re_ear_250</td>
+                                <td>re_ear_500</td>
+                                <td>re_ear_1K</td>
+                                <td>re_ear_2K</td>
+                                <td>re_ear_4K</td>
+                                <td>re_ear_6K</td>
+                                <td>re_ear_8K</td>
+                                <td>bone_le_ear_250</td>
+                                <td>bone_le_ear_500</td>
+                                <td>bone_le_ear_1K</td>
+                                <td>bone_le_ear_2K</td>
+                                <td>bone_le_ear_4K</td>
+                                <td>bone_re_ear_250</td>
+                                <td>bone_re_ear_500</td>
+                                <td>bone_re_ear_1K</td>
+                                <td>bone_re_ear_2K</td>
+                                <td>bone_re_ear_4K</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for audio_da in audio_res %}
+                            {% for audio_data in audio_da %}
+                                <tr>    
+                                    <td>{{audio_data.patient_name}}</td>
+                                    <td>{{audio_data.date}}</td>
+                                    <td>{{audio_data.le_ear_125}}</td>
+                                    <td>{{audio_data.le_ear_250}}</td>
+                                    <td>{{audio_data.le_ear_500}}</td>
+                                    <td>{{audio_data.le_ear_1K}}</td>
+                                    <td>{{audio_data.le_ear_2K}}</td>
+                                    <td>{{audio_data.le_ear_4K}}</td>
+                                    <td>{{audio_data.le_ear_6K}}</td>
+                                    <td>{{audio_data.le_ear_8K}}</td>
+                                    <td>{{audio_data.re_ear_125}}</td>
+                                    <td>{{audio_data.re_ear_250}}</td>
+                                    <td>{{audio_data.re_ear_500}}</td>
+                                    <td>{{audio_data.re_ear_1K}}</td>
+                                    <td>{{audio_data.re_ear_2K}}</td>
+                                    <td>{{audio_data.re_ear_4K}}</td>
+                                    <td>{{audio_data.re_ear_6K}}</td>
+                                    <td>{{audio_data.re_ear_8K}}</td>
+                                    <td>{{audio_data.bone_le_ear_250}}</td>
+                                    <td>{{audio_data.bone_le_ear_500}}</td>
+                                    <td>{{audio_data.bone_le_ear_1K}}</td>
+                                    <td>{{audio_data.bone_le_ear_2K}}</td>
+                                    <td>{{audio_data.bone_le_ear_4K}}</td>
+                                    <td>{{audio_data.bone_re_ear_250}}</td>
+                                    <td>{{audio_data.bone_re_ear_500}}</td>
+                                    <td>{{audio_data.bone_re_ear_1K}}</td>
+                                    <td>{{audio_data.bone_re_ear_2K}}</td>
+                                    <td>{{audio_data.bone_re_ear_4K}}</td>
+                                    
+                                </tr>
+                            {% endfor %}
+                            {% endfor %}
+                            {% if audio_from_to %}
+                            {% for audio_data in audio_from_to %}
+                            <tr>
+                                <td>{{audio_data.patient_name}}</td>
+                                    <td>{{audio_data.date}}</td>
+                                    <td>{{audio_data.le_ear_125}}</td>
+                                    <td>{{audio_data.le_ear_250}}</td>
+                                    <td>{{audio_data.le_ear_500}}</td>
+                                    <td>{{audio_data.le_ear_1K}}</td>
+                                    <td>{{audio_data.le_ear_2K}}</td>
+                                    <td>{{audio_data.le_ear_4K}}</td>
+                                    <td>{{audio_data.le_ear_6K}}</td>
+                                    <td>{{audio_data.le_ear_8K}}</td>
+                                    <td>{{audio_data.re_ear_125}}</td>
+                                    <td>{{audio_data.re_ear_250}}</td>
+                                    <td>{{audio_data.re_ear_500}}</td>
+                                    <td>{{audio_data.re_ear_1K}}</td>
+                                    <td>{{audio_data.re_ear_2K}}</td>
+                                    <td>{{audio_data.re_ear_4K}}</td>
+                                    <td>{{audio_data.re_ear_6K}}</td>
+                                    <td>{{audio_data.re_ear_8K}}</td>
+                                    <td>{{audio_data.bone_le_ear_250}}</td>
+                                    <td>{{audio_data.bone_le_ear_500}}</td>
+                                    <td>{{audio_data.bone_le_ear_1K}}</td>
+                                    <td>{{audio_data.bone_le_ear_2K}}</td>
+                                    <td>{{audio_data.bone_le_ear_4K}}</td>
+                                    <td>{{audio_data.bone_re_ear_250}}</td>
+                                    <td>{{audio_data.bone_re_ear_500}}</td>
+                                    <td>{{audio_data.bone_re_ear_1K}}</td>
+                                    <td>{{audio_data.bone_re_ear_2K}}</td>
+                                    <td>{{audio_data.bone_re_ear_4K}}</td>
+
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="table-responsive">
+                        <h3>Form 7 Report</h3>
+                        <table class="table table-bordered" id="maintable4" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <td>patient_name</td>
+                                <td>dept_name</td>
+                                <td>hazard</td>
+                                <td>danger</td>
+                                <td>job</td>
+                                <td>raw</td>
+                                <td>posting_date</td>
+                                <td>leaving_date</td>
+                                <td>discharge_reason</td>
+                                <td>discahrge_date</td>
+                                <td>symptons</td>
+                                <td>test_nature</td>
+                                <td>results</td>
+                                <td>temp_withdraw</td>
+                                <td>reason_withdraw</td>
+                                <td>unfit_date</td>
+                                <td>fitness_date</td>
+                                <td>date</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for form7_da in form7_res %}
+                            {% for form7_data in form7_da %}
+                                <tr>    
+                                    <td>{{form7_data.patient_name}}</td>
+                                    <td>{{form7_data.dept_name}}</td>
+                                    <td>{{form7_data.hazard}}</td>
+                                    <td>{{form7_data.danger}}</td>
+                                    <td>{{form7_data.job}}</td>
+                                    <td>{{form7_data.raw}}</td>
+                                    <td>{{form7_data.posting_date}}</td>
+                                    <td>{{form7_data.leaving_date}}</td>
+                                    <td>{{form7_data.discharge_reason}}</td>
+                                    <td>{{form7_data.discahrge_date}}</td>
+                                    <td>{{form7_data.symptons}}</td>
+                                    <td>{{form7_data.test_nature}}</td>
+                                    <td>{{form7_data.results}}</td>
+                                    <td>{{form7_data.temp_withdraw}}</td>
+                                    <td>{{form7_data.reason_withdraw}}</td>
+                                    <td>{{form7_data.unfit_date}}</td>
+                                    <td>{{form7_data.fitness_date}}</td>
+                                    <td>{{form7_data.date}}</td>
+                                    
+                                </tr>
+                            {% endfor %}
+                            {% endfor %}
+                            {% if form7_from_to %}
+                            {% for form7_data in form7_from_to %}
+                            <tr>
+                                <td>{{form7_data.patient_name}}</td>
+                                    <td>{{form7_data.dept_name}}</td>
+                                    <td>{{form7_data.hazard}}</td>
+                                    <td>{{form7_data.danger}}</td>
+                                    <td>{{form7_data.job}}</td>
+                                    <td>{{form7_data.raw}}</td>
+                                    <td>{{form7_data.posting_date}}</td>
+                                    <td>{{form7_data.leaving_date}}</td>
+                                    <td>{{form7_data.discharge_reason}}</td>
+                                    <td>{{form7_data.discahrge_date}}</td>
+                                    <td>{{form7_data.symptons}}</td>
+                                    <td>{{form7_data.test_nature}}</td>
+                                    <td>{{form7_data.results}}</td>
+                                    <td>{{form7_data.temp_withdraw}}</td>
+                                    <td>{{form7_data.reason_withdraw}}</td>
+                                    <td>{{form7_data.unfit_date}}</td>
+                                    <td>{{form7_data.fitness_date}}</td>
+                                    <td>{{form7_data.date}}</td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $("#id_username").attr("placeholder", "Enter Username");
+        $("#id_password").attr("placeholder", "Enter Password");
+    </script>
+
+<script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/buttons.flash.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/jszip.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/pdfmake.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/vfs_fonts.js' %}"></script>
+<script src="{% static 'vendor/datatables/buttons.html5.min.js' %}"></script>
+
+<script src="{% static 'vendor/datatables/moment.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/datetime-moment.js' %}"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
+<script>
+  // Call the dataTables jQuery plugin
+  $(document).ready(function() {
+    var currentDate = new Date()
+    var day = currentDate.getDate()
+    var month = currentDate.getMonth() + 1
+    var year = currentDate.getFullYear()
+    
+    var d = day + "-" + month + "-" + year;
+    $('#maintable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+        {
+                extend: 'excelHtml5',
+                title: d + ' PatientDetailsReport '
+            },
+        ]
+        
+    } );
+} );
+$(document).ready(function() {
+    var currentDate = new Date()
+    var day = currentDate.getDate()
+    var month = currentDate.getMonth() + 1
+    var year = currentDate.getFullYear()
+    
+    var d = day + "-" + month + "-" + year;
+    $('#maintable1').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+        {
+                extend: 'excelHtml5',
+                title: d + ' BloodUrineXrayDetailsReport '
+            },
+        ]
+        
+    } );
+} );
+$(document).ready(function() {
+    var currentDate = new Date()
+    var day = currentDate.getDate()
+    var month = currentDate.getMonth() + 1
+    var year = currentDate.getFullYear()
+    
+    var d = day + "-" + month + "-" + year;
+    $('#maintable2').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+        {
+                extend: 'excelHtml5',
+                title: d + ' StoolDetailsReport '
+            },
+        ]
+        
+    } );
+} );
+$(document).ready(function() {
+    var currentDate = new Date()
+    var day = currentDate.getDate()
+    var month = currentDate.getMonth() + 1
+    var year = currentDate.getFullYear()
+    
+    var d = day + "-" + month + "-" + year;
+    $('#maintable3').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+        {
+                extend: 'excelHtml5',
+                title: d + ' AudiometryDetailsReport '
+            },
+        ]
+        
+    } );
+} );
+$(document).ready(function() {
+    var currentDate = new Date()
+    var day = currentDate.getDate()
+    var month = currentDate.getMonth() + 1
+    var year = currentDate.getFullYear()
+    
+    var d = day + "-" + month + "-" + year;
+    $('#maintable4').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+        {
+                extend: 'excelHtml5',
+                title: d + ' Form7DetailsReport '
+            },
+        ]
+        
+    } );
+} );
+</script>
+<!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<!-- <script>
+$(document).ready(function() {
+    $('.datepicker').datepicker();
+});
+</script> -->
+<script>
+  $(document).ready(function() {
+      // $('.datepicker').datepicker();
+      $('.datepicker').datepicker({
+      
+      maxDate: '+0d',
+      changeMonth: true,
+      changeYear: true,
+      defaultDate: '18yr',
+  });
+//   var date = new Date();
+// document.getElementById("id_date").value = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+// document.getElementById("id_date").disabled = true;  
+  });
+</script>
+<!-- <script>
+
+  $('#form_id').submit(function() {
+    document.getElementById("id_date").disabled = false;
+  
+      //Rest of code
+      })
+  </script> -->
+
+{% endblock %}

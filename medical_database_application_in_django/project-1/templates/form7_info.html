@@ -1,0 +1,259 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block stylesheet %}
+
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
+
+{% endblock %}
+{% block body %}
+    <div id="content-wrapper">
+        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {{form.errors}}
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                
+                <li class="breadcrumb-item active">Add Details</li>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="card-body">
+                        <h2>Form7 Details</h2>
+                        
+                        <form   action="." role="form" method="post" enctype="multipart/form-data" >
+                          {% csrf_token %}
+                          <div class="row" >
+                            {{form.form7_id}}
+                            <div class="col-6">{{ form.patient_name|as_crispy_field}}</div>
+                            <div class="col-6">{{ form.date|as_crispy_field}}</div>
+                          </div><br>
+                          <div class="row">
+                            <div class="col-6">
+                              {{ form.dept_name|as_crispy_field}}
+                            </div>
+                            <div class="col-6">
+                              {{ form.hazard|as_crispy_field}}
+                            </div>
+
+                          </div><br>
+                          <div class="row">
+                            <div class="col-6">
+                              {{ form.danger|as_crispy_field}}
+                            </div>
+                            <div class="col-6">
+                              {{ form.job|as_crispy_field}}
+                            </div>
+
+                          </div><br>
+                          <div class="row">
+                            <div class="col-6">
+                              {{ form.raw|as_crispy_field}}
+                            </div>
+                            <div class="col-6">
+                              {{ form.discharge_reason|as_crispy_field}}
+
+                            </div>
+
+                          </div><br>
+                          <div class="row">
+                            <div class="col-6">
+                              {{ form.symptons|as_crispy_field}}
+
+                            </div>
+                            <div class="col-6">
+                              {{ form.test_nature|as_crispy_field}}
+
+                            </div>
+
+                          </div><br>
+                          <div class="row">
+                            <div class="col-6">
+                              {{ form.results|as_crispy_field}}
+
+                            </div>
+                            <div class="col-6">
+                              {{ form.temp_withdraw|as_crispy_field}}
+
+                            </div>
+
+                          </div><br>
+                          <div class="row">
+                            <div class="col-6">
+                              {{ form.reason_withdraw|as_crispy_field}}
+
+                            </div>
+                            <div class="col-6">
+                              {{ form.discahrge_date|as_crispy_field}}
+
+                            </div>
+
+                          </div><br>
+                          <div class="row">
+                            <div class="col-6">
+                              {{ form.posting_date|as_crispy_field}}
+
+                            </div>
+                            <div class="col-6">
+                              {{ form.leaving_date|as_crispy_field}}
+
+                            </div>
+
+                          </div><br>
+                          <div class="row">
+                            <div class="col-6">
+                              {{ form.unfit_date|as_crispy_field}}
+                            </div>
+                            <div class="col-6">
+                              {{ form.fitness_date|as_crispy_field}}
+                            </div>
+
+                          </div><br>
+                          
+                          
+                          
+                          <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                          <button class="btn btn-secondary btn-sm" type="reset">Cancel</button>
+                        </form>
+                      </div>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="maintable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                              <th></th>
+                              <th>Name</th>
+                              <th>Date</th>
+                              <th>Department       </th>
+                              <th>Hazard Process</th>
+                              <th>Danger Proces</th>
+                              <th>Nature of job</th>
+                              <th>Raw matreils</th>
+                              <th>Posting Date</th>
+                              <th>Leaving Date</th>
+                              <th>Discharge Reason</th>
+                              <th>Discharge Date</th>
+                              <th>Symptons</th>
+                              <th>Test Nature</th>
+                              <th>Results</th>
+                              <th>Temporay Withdraw</th>
+                              <th>Reason for withdraw</th>
+                              <th>Unfit Date</th>
+                              <th>Fit Date</th>
+                              <th>Signature</th>
+                              
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for form_data in form7_info %}
+                                <tr>
+                                          <td>
+                                            <a class="btn btn-sm btn-warning" href="{% url 'form7_list' form_data.id %}"> <span class="fa fa-edit"></span> Edit</a>
+                                            <a class="btn btn-sm btn-danger" href="{% url 'form7_delete' form_data.id %}"><span class="fa fa-trash"></span> Delete</a>
+                                            <a class="btn btn-sm btn-primary"href="{% url 'pdf_form7' form_data.id %}"><span class="fa fa-print"></span> Print</a>
+                                          
+                                          </td>
+                                          <td>{{form_data.patient_name       }}</td>
+                                          <td>{{form_data.date       }}</td>
+                                          <td>{{form_data.dept_name       }}</td>
+                                          <td>{{form_data.hazard}}</td>
+                                          <td>{{form_data.danger}}</td>
+                                          <td>{{form_data.job}}</td>
+                                          <td>{{form_data.raw}}</td>
+                                          <td>{{form_data.posting_date}}</td>
+                                          <td>{{form_data.leaving_date}}</td>
+                                          <td>{{form_data.discharge_reason}}</td>
+                                          <td>{{form_data.discahrge_date}}</td>
+                                          <td>{{form_data.symptons}}</td>
+                                          <td>{{form_data.test_nature}}</td>
+                                          <td>{{form_data.results}}</td>
+                                          <td>{{form_data.temp_withdraw}}</td>
+                                          <td>{{form_data.reason_withdraw}}</td>
+                                          <td>{{form_data.unfit_date}}</td>
+                                          <td>{{form_data.fitness_date}}</td>
+                                          <td></td>
+                                    
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $("#id_username").attr("placeholder", "Enter Username");
+        $("#id_password").attr("placeholder", "Enter Password");
+    </script>
+
+<script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/buttons.flash.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/jszip.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/pdfmake.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/vfs_fonts.js' %}"></script>
+<script src="{% static 'vendor/datatables/buttons.html5.min.js' %}"></script>
+
+<script src="{% static 'vendor/datatables/moment.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/datetime-moment.js' %}"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
+<script>
+  // Call the dataTables jQuery plugin
+  $(document).ready(function() {
+    $('#maintable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+             'excel'
+        ]
+        
+    } );
+} );
+</script>
+<!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<!-- <script>
+$(document).ready(function() {
+    $('.datepicker').datepicker();
+});
+</script> -->
+<script>
+  $(document).ready(function() {
+      // $('.datepicker').datepicker();
+      $('.datepicker').datepicker({
+      
+      maxDate: '+0d',
+      changeMonth: true,
+      changeYear: true,
+      defaultDate: '18yr',
+  });
+//   var date = new Date();
+// document.getElementById("id_date").value = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+// document.getElementById("id_date").disabled = true;  
+      
+  });
+</script>
+<!-- <script>
+
+  $('#form_id').submit(function() {
+    document.getElementById("id_date").disabled = false;
+  
+      //Rest of code
+      })
+  </script> -->
+
+
+{% endblock %}
